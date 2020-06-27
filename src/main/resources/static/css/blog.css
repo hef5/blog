@@ -1,0 +1,212 @@
+/* body background-color: #7382a3 */
+/* comment background  #ecb491 */
+
+/*  color configuration  */
+#context{
+    background-color: #7382a3;
+}
+
+#blog-container{
+    background-color: #f0f0f0;
+}
+
+#comment-area{
+    background-color: white;
+}
+
+
+.m-fixed{
+    position: sticky;
+    z-index: 1;
+    top: 100px;
+}
+
+/*---- comments table-----*/
+/*#avatar{
+    padding: 0px;
+    width: 5%;
+}*/
+
+#author {
+    padding: 0px;
+    vertical-align: bottom;
+    width: 25%;
+}
+
+#date {
+    padding: 0px;
+    vertical-align: bottom;
+    width: 60%;
+}
+
+#comment-content{
+    padding-left: 0px;
+    padding-top: 10px;
+}
+/*---- comments table over-----*/
+
+/*---- reply comments table-----*/
+#reply-comment{
+    padding-right: 0px;
+    margin-left: 15%;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+
+.comment-info-box{
+    border-bottom: 0.5px solid #ce9e81 !important;
+}
+
+/*#reply-avatar{
+    padding: 0px;
+    width: 5%;
+}*/
+
+#reply-author {
+    padding: 0px;
+    vertical-align: bottom;
+    width: 25%;
+}
+
+#reply-date {
+    padding: 0px;
+    vertical-align: bottom;
+    width: 50%;
+}
+
+.comment-content{
+    padding-left: 0px !important;
+    padding-top: 10px !important;
+}
+
+
+/*---- reply comments table over-----*/
+
+/*---- common style of comments module-----*/
+table {
+    width: 100%;
+    border-collapse: collapse !important;
+    margin-left: 0px;
+    margin-right: 20px;
+    border: 0px !important;
+    background-color: white !important;
+}
+
+.comment-author{
+    display: inline-block !important;
+    vertical-align: middle !important;
+    font-size: 8pt;
+}
+
+.reply-button {
+    padding: 0px !important;
+    text-align-last: end !important;
+    vertical-align: bottom !important;
+    width: auto;
+    cursor: pointer;
+    font-size: 8pt;
+}
+
+.m-label{
+    border: solid red;
+    padding: 0;
+    font-size: 8px;
+    font-weight: 700;
+    color: red;
+}
+/*---- common style of comments module OVER-----*/
+
+
+
+/*-----------  first picture ------------*/
+#first-picture{
+    margin-left: 3%;
+    margin-right: 3%;
+    height: 400px;
+    background-image: url("https://picsum.photos/600/400");
+    width: 94%;
+}
+
+
+/*---------content text ---------*/
+#content-container{
+    background-size: 20px 20px;
+    background-image:
+            linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+/*    background: url("../images/old_map.png");*/
+
+
+
+/*-- style of title --*/
+#content-title{
+    font-family: NSimSun;
+    font-size: 18pt;
+    text-align: center;
+}
+
+#content h2{
+    font-family: SimHei;
+    font-size: 16pt;
+    font-weight: 900 !important;
+    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+#content h3{
+    font-family: SimHei;
+    font-size: 14pt;
+    font-weight: 900 !important;
+    margin-top: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+#content h4{
+    font-family: SimHei;
+    font-size: 12pt;
+    font-weight: 900 !important;
+    margin-top: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+/*-- style of title --*/
+
+#content p{
+    font-family: NSimSun;
+    font-size: 12pt;
+    font-weight: 500 !important;
+    line-height: 1.8 !important;
+    text-align: justify !important;
+}
+
+/*--- position of toc -----*/
+#toc-container{
+    padding: 5px;
+}
+#toc{
+    padding-right: 15px;
+}
+
+/*--- layout ---*/
+#blog-container{
+    padding: 5px;
+}
+#tag-container{
+    padding: 5px;
+}
+
+
+.m-teal{
+
+}
+
+
+@media screen and (max-width: 768px){
+    #toc-container{
+        display: none;
+    }
+}
+
+
