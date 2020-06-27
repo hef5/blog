@@ -50,7 +50,7 @@
             <div class="ui basic segment">
                 <div class="ui horizontal link list">
                     <div class="item middle aligned">
-                        <img alt="#" class="ui avatar image" src="../static/images/home.jpg"
+                        <img alt="#" class="ui avatar image" src="../static/images/hefeng.jpg"
                              th:src="@{${blog.user.avatar}}">
                         <div class="content"><a class="header" href="#" th:text="${blog.user.nickname}">鹤峰陈</a></div>
                     </div>
@@ -171,7 +171,7 @@
             </div>
 
             <!-- 博客信息 -->
-            <div class="ui basic segment">
+          <!--  <div class="ui basic segment">
                 <div class="ui grid">
                     <div class="eleven wide column">
                         <ui class="list">
@@ -187,30 +187,82 @@
                              style="width: 110px" th:src="@{/images/wechat.jpg}">
                     </div>
                 </div>
-            </div>
+            </div>-->
 
         </div>
 
-        <div id="comment-area" class="ui container m-padded-tb-big">
+        <div id="comment-container" class="ui container m-padded-tb-big">
             <!-- 留言区域 -->
             <div class="ui basic segment" th:if="${blog.commentAllowed}">
-                <div id="comment-container" class="ui basic segment" >
+                <div id="comment-area" class="ui basic segment" >
 
-                    <div th:fragment="commentList">
-                        <div class="ui comments" style="max-width: 100%">
+                    <div class="ui comments" th:fragment="commentList">
+                        <h3 class="ui dividing header">Comments</h3>
+
+                        <!-- first reply comments -->
+                        <div id="comment-cell" class="comment" th:each="comment : ${comments}">
+
+                            <div class="content">
+                                <a class="author" th:text="${comment.nickname}">Elliot Fu</a>
+                                <div class="m-label comment-author" th:if="${comment.adminComment}">
+                                    <p>博主</p>
+                                </div>
+                                <div class="metadata">
+                                    <span class="date"
+                                          th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">Yesterday at 12:30AM</span>
+                                </div>
+                                <div class="actions" style="display: inline">
+                                    <a class="reply" data-commentid="1" data-commentnickname="Matt"
+                                       onclick="reply(this)"
+                                       th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}">
+                                        回复
+                                    </a>
+                                </div>
+                                <div class="text" th:utext="${comment.content}">
+                                    <p>This has been very useful for my research. Thanks as well!</p>
+                                </div>
+                            </div>
+
+                            <!-- second reply comments -->
+                            <div class="comments" style="margin-left: 20%" th:if="${#arrays.length(comment.replyComments)}>0">
+                                <div class="comment" th:each="reply : ${comment.replyComments}">
+<!--                                    <div class="ui divider" style="margin-bottom:0"></div>-->
+                                    <div class="content">
+                                        <a class="author" th:text="${reply.nickname}">Jenny Hess</a>
+                                        <div class="m-bable comment-author" th:if="${reply.adminComment}"><p>博主</p></div>
+                                        <span class="comment-author m-teal" th:text="|@ ${reply.parentComment.nickname}|" >@小白</span>
+                                        <div class="metadata">
+                                            <span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                        </div>
+                                        <div class="actions" style="display: inline">
+                                            <a class="reply" data-commentid="1" data-commentnickname="Matt"
+                                               th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}"
+                                               onclick="reply(this)">回复
+                                            </a>
+                                        </div>
+                                        <div class="text" th:utext="${reply.content}">
+                                            How artistic!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                       <!-- <div class="ui comments" style="max-width: 100%">
                             <h3 class="ui dividing header">Comments</h3>
 
-                            <!-- first comment block -->
+                            &lt;!&ndash; first comment block &ndash;&gt;
                             <div id="comment-cell" class="ui basic segment" th:each="comment : ${comments}">
                                 <table class="ui compact table">
                                     <tbody>
                                     <tr class="comment-info-box">
-                                        <!--<td id="avatar">
+                                        &lt;!&ndash;<td id="avatar">
                                             <a class="avatar">
                                                 <img class="ui avatar image" src="https://picsum.photos/100"
                                                      th:src="@{${comment.avatar}}">
                                             </a>
-                                        </td>-->
+                                        </td>&ndash;&gt;
                                         <td id="author">
                                             <span class="comment-author">作者:</span>
                                             <a class="comment-author" >
@@ -237,7 +289,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <!--<td></td>-->
+                                        &lt;!&ndash;<td></td>&ndash;&gt;
                                         <td colspan="2" class="comment-content">
                                             <div th:utext="${comment.content}">
                                                 <p>如有能力考个建筑师证，这个是越老越值钱。</p>
@@ -248,21 +300,21 @@
                                     </tbody>
                                 </table>
 
-                                <!-- second oder or reply comments -->
+                                &lt;!&ndash; second oder or reply comments &ndash;&gt;
                                 <div style="padding-right: 0px" class="ui basic segment" th:if="${#arrays.length(comment.replyComments)}>0">
 
                                     <div id="reply-comment" class="ui basic segment" th:each="reply : ${comment.replyComments}">
 
-                                        <!-- reply comments table-->
+                                        &lt;!&ndash; reply comments table&ndash;&gt;
                                         <table class="ui compact table">
                                             <tbody>
                                             <tr class="comment-info-box">
-                                                <!--<td id="reply-avatar">
+                                                &lt;!&ndash;<td id="reply-avatar">
                                                     <a class="avatar">
                                                         <img src="../static/images/home.jpg" th:src="@{${reply.avatar}}" style="width:2.5em; height:2.5em">
                                                     </a>
-                                                </td>-->
-                                                <!-- author information-->
+                                                </td>&ndash;&gt;
+                                                &lt;!&ndash; author information&ndash;&gt;
                                                 <td id="reply-author">
                                                     <div class="reply-info">
                                                         <span class="comment-author" th:text="${reply.nickname}">小红</span>
@@ -283,8 +335,8 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <!-- <td></td>-->
-                                                <!-- reply content -->
+                                                &lt;!&ndash; <td></td>&ndash;&gt;
+                                                &lt;!&ndash; reply content &ndash;&gt;
                                                 <td colspan="2" class="comment-content">
                                                     <div class="text" th:utext="${reply.content}">
                                                         How artistic!
@@ -301,7 +353,7 @@
                             </div>
 
 
-                            <!--/*-->
+                            &lt;!&ndash;/*&ndash;&gt;
                             <div class="comment">
                                 <a class="avatar">
                                     <img src="https://unsplash.it/10/10?image=1005" style="width: 2.5em; height:2.5em">
@@ -355,9 +407,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--*/-->
+                            &lt;!&ndash;*/&ndash;&gt;
 
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="ui reply form" id="comment-form">
@@ -546,7 +598,7 @@
     });
 
     $(function () {
-        $("#comment-container").load("[[@{/comments/{id}(id=${blog.id})}]]");
+        $("#comment-area").load("[[@{/comments/{id}(id=${blog.id})}]]");
     });
 
     $('#commentpost-btn').click(function () {
@@ -561,7 +613,7 @@
     });
 
     function postData() {
-        $("#comment-container").load("/comments", {
+        $("#comment-area").load("/comments", {
             "parentComment.id": $("[name='parentComment.id']").val(),
             "blog.id": $("[name='blog.id']").val(),
             "nickname": $("[name='nickname']").val(),

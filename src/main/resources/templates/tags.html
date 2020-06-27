@@ -38,10 +38,10 @@
     <div class="m-container-small m-padded-tb-big">
         <div class="ui container">
             <!-- header -->
-            <div class="ui top attached segment">
+            <div class="ui attached segment header-bgc">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <h3 class="ui teal header">标签</h3>
+                        <h3 class="ui header">标签</h3>
                     </div>
                     <div class="right aligned column">
                         共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(tags)}">14</h2> 个
@@ -49,14 +49,14 @@
                 </div>
             </div>
 
-            <div class="ui attached segment m-padded-tb-large">
+            <div class="ui attached segment m-padded-tb-large content-bgc">
                 <a href="#" th:each="tag : ${tags}" th:href="@{/tags/{id}(id=${tag.id})}" class="ui teal basic label m-margin-tb-tiny">
                     <span th:text="${tag.name}">数学</span>
                     <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
                 </a>
             </div>
 
-            <div class="ui top attached teal segment">
+            <div class="ui attached segment content-bgc">
                 <div th:each="blog : ${page.content}" class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
                     <div class="ui mobile reversed stackable grid">
                         <div class="eleven wide column">
@@ -148,7 +148,7 @@
 
             </div>
 
-            <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
+            <div class="ui attached segment content-bgc" th:if="${page.totalPages}>1">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
                         <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>

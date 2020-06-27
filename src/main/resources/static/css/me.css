@@ -1,7 +1,22 @@
-body {
+html {
     /*background: url("../images/double-bubble-outline.png ");*/
-    background-color: #7382a3;
+    background-color: #7382a3 !important;
 }
+body{
+    background-color: #7382a3 !important;
+}
+
+.content-bgc{
+    background-color: #eeeeee !important;
+}
+.header-bgc{
+    background-color: lightgray !important;
+}
+
+.m-inline {
+    display: inline;
+}
+
 .m-padded-lr-responsive{
     padding-left: 0.5em !important;
     padding-right: 0.5em !important;

@@ -38,10 +38,10 @@
     <div class="m-container-small m-padded-tb-big">
         <div class="ui container">
             <!-- header -->
-            <div class="ui top attached segment">
+            <div class="ui attached segment header-bgc">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <h3 class="ui teal header">分类</h3>
+                        <h3 class="ui header">分类</h3>
                     </div>
                     <div class="right aligned column">
                         共
@@ -53,10 +53,10 @@
                 </div>
             </div>
 
-            <div class="ui attached segment m-padded-tb-large">
+            <div class="ui attached segment m-padded-tb-large content-bgc">
                 <div th:each="type : ${types}" class="ui labeled button m-margin-tb-tiny">
-                    <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui basic  button" th:classappend="${type.id==activeTypeId} ? 'teal'" th:text="${type.name}">思考与感悟</a>
-                    <div class="ui basic  left pointing label"
+                    <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui basic button" th:classappend="${type.id==activeTypeId} ? 'teal'" th:text="${type.name}">思考与感悟</a>
+                    <div class="ui basic left pointing label"
                          th:classappend="${type.id==activeTypeId} ? 'teal'"
                          th:text="${#arrays.length(type.blogs)}">24
                     </div>
@@ -65,7 +65,7 @@
 
 
 
-            <div class="ui top attached teal segment">
+            <div class="ui attached segment content-bgc">
                 <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear"
                      th:each="blog : ${page.content}">
                     <div class="ui mobile reversed stackable grid">
@@ -82,17 +82,17 @@
                             <div class="ui stackable grid">
                                 <div class="eleven wide column">
                                     <div class="ui mini horizontal link list">
-                                        <div class="item">
+                                        <div class="middle aligned item">
                                             <img th:src="@{${blog.user.avatar}}" src="../static/images/home.jpg" alt="#" class="ui avatar image">
-                                            <div th:text="${blog.user.nickname}" class="content"><a class="header">陈鹤峰</a></div>
+                                            <a class="header content" th:text="${blog.user.nickname}">陈鹤峰</a>
                                         </div>
-                                        <div class="item middle aligned">
+                                        <div class="middle aligned item">
                                             <i class="calendar icon"></i>
                                             <span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">
                                                 2017-10-01
                                             </span>
                                         </div>
-                                        <div class="item middle aligned">
+                                        <div class="middle aligned item">
                                             <i class="eye icon"></i> <span th:text="${blog.views}">2342</span>
                                         </div>
                                     </div>
@@ -112,7 +112,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
+                <!--<div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
                     <div class="ui mobile reversed stackable grid">
                         <div class="eleven wide column">
                             <h3 class="ui header">德语媒体</h3>
@@ -255,10 +255,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
 
-            <div class="ui bottom attached segment">
+            <div class="ui attached segment content-bgc">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
                         <a href="" class="ui mini teal basic button">上一页</a>
