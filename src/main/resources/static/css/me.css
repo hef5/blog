@@ -107,6 +107,9 @@ body{
 }
 
 /*----- margin -----*/
+.m-margin-right{
+    margin: 1em
+}
 .m-margin-tb-tiny{
     margin-top: 0.3em !important;
     margin-bottom: 0.3em !important;

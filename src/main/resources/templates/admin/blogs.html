@@ -95,7 +95,7 @@
                             <th></th>
                             <th>标题</th>
                             <th>类型</th>
-                            <th>推荐</th>
+                            <th >推荐</th>
                             <th>状态</th>
                             <th>更新时间</th>
                             <th>操作</th>
@@ -107,11 +107,11 @@
                             <td th:text="${blog.title}">刻意练习清单</td>
                             <td th:text="${blog.type.name}">认知清单</td>
                             <td th:text="${blog.recommend} ? '是':'否'">是</td>
-                            <td th:text="${blog.published} ? '发布':'草稿'">是</td>
+                            <td th:text="${blog.published} ? '发布':'草稿'">发布</td>
                             <td th:text="${blog.updateTime}">2020年5月14日 22点56分</td>
                             <td>
-                                <a href="#" th:href="@{/admin/blogs/{id}/update(id=${blog.id})}" class="ui mini teal button">编辑</a>
-                                <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini teal button">删除</a>
+                                <a href="#" th:href="@{/admin/blogs/{id}/update(id=${blog.id})}" class="ui mini teal button m-margin-right">编辑</a>
+                                <a th:onclick="|confirmDelete('${blog.id}')|" class="ui mini teal button">删除</a>
                             </td>
                         </tr>
                     </tbody>
@@ -141,7 +141,22 @@
  
 
     <br>
-
+    <!-- delete confirm -->
+    <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            你确定要删除吗，不可恢复，请做好备份
+        </div>
+        <div class="actions">
+            <div class="ui black deny button">
+                取消
+            </div>
+            <div id="confirm-btn" class="ui positive right labeled icon button">
+                确定
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
 
 
     <!-- footer -->
@@ -185,10 +200,10 @@
         </div>
     </footer>
 
-    <!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-    <!--/*/</th:block>/*/-->
+
     <script>
 
         $(".toggle").click(function () {
@@ -233,6 +248,21 @@
                 ;
             })
         ;
+
+
+    </script>
+    <script >
+
+        function confirmDelete (blogId){
+            $('.ui.modal')
+                .modal('show');
+            $("#confirm-btn").on("click",
+                function(e){
+                    e.preventDefault();
+                    $("*").load("/admin/blogs/"+ blogId + "/delete");
+                }
+            )
+        }
 
     </script>
 

@@ -24,7 +24,6 @@ public class LoginController {
 
     @GetMapping
     public String loginPage(){
-        System.out.println("get mapping: /admin");
         return "admin/login";
     }
 
@@ -33,8 +32,6 @@ public class LoginController {
                         @RequestParam String password,
                         HttpSession session,
                         RedirectAttributes attributes){
-        System.out.println("post mapping: /admin/login");
-        System.out.println(username + " " + password);
         User user = userService.checkUser(username, password);
         if (user != null){
             user.setPassword(null);
