@@ -65,14 +65,16 @@ $(function () {
             $("#userName").text(sessionStorage.getItem('userName')),
             $("#userAvatar").attr("src", sessionStorage.getItem('userAvatar'))
 
+
+        window.addEventListener('popstate', function(e){
+            if(e.state)  $.ajax(history.state);
+        });
+
     })
 
-    /*
-    window.addEventListener('popstate', function(e){
-        e.preventDefault();
-        $.ajax(history.state);
-    });
-    */
+
+
+
 
 
 
