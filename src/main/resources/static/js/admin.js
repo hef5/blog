@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     // add token to header before request
     $("#blogs").on("click",
@@ -12,6 +13,7 @@ $(document).ready(function () {
                     $("body").html(data)
                 }
             })
+            history.pushState(null, null, "/admin/blogs.html");
         }
     ),
 
@@ -28,6 +30,7 @@ $(document).ready(function () {
                     $("body").html(data)
                 }
             })
+            history.pushState(null, null, "/admin/tags.html");
         }
     ),
 
@@ -44,6 +47,7 @@ $(document).ready(function () {
                     $("body").html(data)
                 }
             })
+            history.pushState(null, null, "/admin/types.html");
         }
     ),
 
@@ -61,11 +65,17 @@ $(document).ready(function () {
                     $("body").html(data)
                 }
             })
+            history.pushState(null, null, "/admin/blogs.html");
         }
     ),
 
-    $("#userName").attr("text", sessionStorage.getItem('userName')),
+    $("#userName").text(sessionStorage.getItem('userName')),
     $("#userAvatar").attr("src", sessionStorage.getItem('userAvatar'))
 
 })
+
+window.addEventListener('popstate', function(e){
+    if(e.state)
+        openURL(e.state.href);
+});
 

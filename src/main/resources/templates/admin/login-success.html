@@ -58,7 +58,6 @@
         </div>
     </div>
 
-
     <br>
 
 
@@ -110,7 +109,6 @@
 
 
     <script>
-
         $(".toggle").click(function () {
             $(".m-item").toggleClass("m-mobile-hide");
         });
@@ -118,9 +116,14 @@
         $('.ui.dropdown').dropdown({
             on:'hover'
         });
+
     </script>
 
-    
+    <script th:src="@{/js/admin.js}"></script>
+    <script th:src="@{/js/success.js}"></script>
+    <script>
+        storeItems('[[${token}]]', '[[${user.nickname}]]', '[[${user.avatar}]]');
+    </script>
 
 </body>
 

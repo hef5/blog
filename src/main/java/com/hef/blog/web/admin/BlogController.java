@@ -44,7 +44,7 @@ public class BlogController {
 
     // retrieve blogs, types and render them in blogs.html
     @GetMapping("/blogs")
-    public String blogs(@PageableDefault(size=10, sort ={"updateTime"}, direction = Sort.Direction.DESC)
+    public String blogs(@PageableDefault(size=3, sort ={"updateTime"}, direction = Sort.Direction.DESC)
                                     Pageable pageable, Model model){
         model.addAttribute("types", typeService.listType());
         model.addAttribute("page", blogService.listBlog(pageable));
@@ -53,7 +53,7 @@ public class BlogController {
 
     // list blogs under the search condition of the given title and type.
     @PostMapping("/blogs/search")
-    public String search(@PageableDefault(size=10, sort ={"updateTime"}, direction = Sort.Direction.DESC)
+    public String search(@PageableDefault(size=3, sort ={"updateTime"}, direction = Sort.Direction.DESC)
                                      Pageable pageable, BlogQuery blog, Model model){
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         return LIST_SEARCH;
