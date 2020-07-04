@@ -86,3 +86,8 @@ const otherPage = function (pageNumber) {
     history.pushState(null, null, "/admin/blogs/page=" + pageNumber);
     return true;
 }
+
+/**
+ * const 函数不能放在 document.read(function(){ }) 里头， 把js文件链接放在html里，函数不能被引用。
+ *
+ * */
