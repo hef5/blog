@@ -3,7 +3,7 @@
 <div class="m-container-small m-padded-tb-big">
     <div class="ui container">
         <div class="ui secondary segment form">
-            <input name="page" type="hidden">
+            <input id="pageNumber" type="hidden">
             <div class="inline fields">
                 <div class="field">
                     <input name="title" placeholder="标题" type="text">
@@ -71,9 +71,9 @@
                 <tr>
                     <th colspan="7">
                         <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
-                            <a class="icon item" th:attr="data-page=${page.number}-1"
+                            <a class="icon item"
                                th:onclick="|otherPage(${page.number}-1)|" th:unless="${page.first}">上一页</a>
-                            <a class="icon item" th:attr="data-page=${page.number}+1"
+                            <a class="icon item"
                                th:onclick="|otherPage(${page.number}+1)|" th:unless="${page.last}">下一页</a>
                         </div>
                         <a class="ui mini right floated teal basic button" id="add-blog">新增</a>
@@ -111,4 +111,9 @@
     </div>
 </div>
 
+<script>
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+</script>
 
