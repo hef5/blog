@@ -49,14 +49,17 @@
 
 
     <!-- context -->
-    <div class="m-container-small m-padded-tb-big">
-        <div class="ui container">
-            <div class="ui success large message">
-                <h3>Hi, </h3>
-                <p>陈鹤峰， 欢迎登陆</p>
+    <div id="ajax-response">
+        <div class="m-container-small m-padded-tb-big">
+            <div class="ui container">
+                <div class="ui success large message">
+                    <h3>Hi, </h3>
+                    <p>陈鹤峰， 欢迎登陆</p>
+                </div>
             </div>
         </div>
     </div>
+
 
     <br>
 
@@ -117,10 +120,27 @@
             on:'hover'
         });
 
+        // close message
+        $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
+
+        $('#clear-btn')
+            .on('click', function () {
+                $('.ui.dropdown')
+                    .dropdown('clear')
+                ;
+            });
+
+
     </script>
 
-    <script th:src="@{/js/admin.js}"></script>
-    <script th:src="@{/js/success.js}"></script>
+    <script th:src="@{/js/admin.js}" type="text/javascript"></script>
+    <script th:src="@{/js/success.js}" type="text/javascript"></script>
+    <script th:src="@{/js/blog.js}" type="text/javascript"></script>
     <script>
         storeItems('[[${token}]]', '[[${user.nickname}]]', '[[${user.avatar}]]');
     </script>
