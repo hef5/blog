@@ -1,40 +1,7 @@
 // click delete event function
-function confirmDelete(blogId) {
-    $('.ui.modal')
-        .modal('show');
-    $("#confirm-btn").on("click",
-        function (e) {
-            e.preventDefault();
-            $.ajax({
-                url: "/admin/blogs/" + blogId + "/delete",
-                type: "GET",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
-                },
-                success: function (data) {
-                    $("body").html(data)
-                }
-            })
-        }
-    )
-}
 
-$("#add-blog").on("click",
-    function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: "/admin/blogs/input",
-            type: "GET",
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
-            },
-            success: function (data) {
-                $("body").html(data)
-            }
-        })
-        history.pushState(null, null, "/admin/blogs/input");
-    }
-)
+
+
 
 $("#search-btn").on("click",
     function (e) {
@@ -94,6 +61,14 @@ $("#search-btn").on("click",
 
 
 /**
+ *
  * const 函数不能放在 document.read(function(){ }) 里头， 把js文件链接放在html里，函数不能被引用。
+ *
+ * history.pushState() 里的第一个参数state有要求的，state必须为可以序列化的对象，对象的方法无法被序列化，
+ * 如果传入history.pushState()的第一个参数对象，是通过Object.create()创建的对象，并且包含了无法被序列化的方法，
+ * 使用history.pushState()方法不会报错，但会把参数对象里的方法自动排除，用JSON.stringify()序列化此对象
+ * 会有一样效果，然而，如果对象时通过构造函数创建的，则传入到history.pushState()里会报错
+ * 错误为: Failed to execute 'pushState' on 'History': function(){} could not be cloned.
+ *
  *
  * */

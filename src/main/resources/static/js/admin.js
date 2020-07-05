@@ -1,86 +1,92 @@
-$(function () {
+const URL_BLOG = "/admin/blogs";
+const URL_TYPE = "/admin/types";
+const URL_TAG = "/admin/tags";
+const URL_LOGOUT = "/admin/layout";
+const GET = "GET";
+const POST = "POST";
 
-    const urlBlog = "/admin/blogs";
-    const urlType = "/admin/types";
-    const urlTag = "/admin/tags";
-    const urlLogout = "/admin/layout";
+function StateObj(url, type) {
+    this.url = url;
+    this.type = type;
+}
 
-/*    let AjaxArgs = {
-        url: "/admin/blogs",
-        type: "GET",
+function ajax(url, type) {
+    $.ajax({
+        url: url,
+        type: type,
         beforeSend: function (xhr) {
             xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
         },
         success: function (data) {
-            $("body").html(data);
-        }
-    }*/
-
-    function AjaxArgs (url, type) {
-        this.url = url;
-        this.type = type;
-        this.beforeSend = function (xhr) {
-            xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
-        };
-        this.success = function (data) {
             $("#ajax-response").html(data);
-        };
-    }
-
-    function createAjaxArgs(url, type){
-        let s = Object.create(AjaxArgs);
-        s.url = url;
-        s.type = type;
-        return s;
-    }
-
-    //let clickBlog = createAjaxArgs(urlBlog, "GET");
-    let clickBlog = new AjaxArgs(urlBlog, "GET");
-
-    let clickType = createAjaxArgs(urlType, "GET");
-    let clickTag = createAjaxArgs(urlTag, "GET");
-    let clickLogout = createAjaxArgs(urlLogout, "GET");
-
-    // add token to header before request
-    $("#blogs").on("click",
-        function (e) {
-            $.ajax(clickBlog);
-            history.pushState(clickBlog, null, "/admin/blogs.html");
         }
-    ),
-
-    $("#tags").on("click",
-        function (e) {
-            e.preventDefault();
-            $.ajax(clickTag);
-            history.pushState(clickTag, null, "/admin/tags.html");
-        }
-    ),
-
-    $("#types").on("click",
-        function (e) {
-            e.preventDefault();
-            $.ajax(clickType)
-            history.pushState(clickType, null, "/admin/types.html");
-        }
-    ),
-
-    $("#layout").on("click",
-        function (e, token) {
-            e.preventDefault();
-            $.ajax(clickLogout)
-            history.pushState(clickLogout, null, "/admin/blogs.html");
-        }
-    ),
-
-    $("#userName").text(sessionStorage.getItem('userName')),
-    $("#userAvatar").attr("src", sessionStorage.getItem('userAvatar'))
-
-
-
-})
-
-window.onpopstate = function(e){
-    let vobj = history.state;
-    $.ajax(vobj);
+    })
 }
+
+$("#blogs").on("click",
+    function (e) {
+        ajax(URL_BLOG, GET);
+        history.pushState(new StateObj(URL_BLOG, GET), null, "/admin/blogs.html");
+    }
+),
+
+$("#tags").on("click",
+    function (e) {
+        ajax(URL_TAG, GET);
+        history.pushState(new StateObj(URL_TAG, GET), null, "/admin/tags.html");
+    }
+),
+
+$("#types").on("click",
+    function (e) {
+        ajax(URL_TYPE, GET)
+        history.pushState(new StateObj(URL_TYPE, GET), null, "/admin/types.html");
+    }
+),
+
+$("#layout").on("click",
+    function (e, token) {
+        e.preventDefault();
+        ajax(URL_LOGOUT, GET)
+        history.pushState(new StateObj(URL_LOGOUT, GET), null, "/admin/blogs.html");
+    }
+),
+
+$("#userName").text(sessionStorage.getItem('userName')),
+$("#userAvatar").attr("src", sessionStorage.getItem('userAvatar'))
+
+window.onpopstate = function (e) {
+    let stateObj = history.state;
+    ajax(stateObj.url, stateObj.type);
+}
+
+/** blog list Module */
+
+function confirmDelete(blogId) {
+    let url = "/admin/blogs/" + blogId + "/delete";
+    $('.ui.modal')
+        .modal('show');
+    $("#confirm-btn").on("click",
+        function (e) {
+            e.preventDefault();
+            ajax(url, GET);
+        }
+    )
+}
+
+$("#add-blog").on("click",
+    function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "/admin/blogs/input",
+            type: "GET",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
+            },
+            success: function (data) {
+                $("body").html(data)
+            }
+        })
+        history.pushState(null, null, "/admin/blogs/input");
+    }
+)
