@@ -6,24 +6,6 @@ const URL_BLOG_INPUT  = "/admin/blogs/input";
 const URL_BLOG_SEARCH = "/admin/blogs/search";
 
 
-
-function StateGet(url) {
-    this.url = url;
-}
-
-function ajaxGet(url) {
-    $.ajax({
-        url: url,
-        type: "GET",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
-        },
-        success: function (data) {
-            $("#ajax-response").html(data);
-        }
-    })
-}
-
 $("#blogs").on("click",
     function (e) {
         ajaxGet(URL_BLOG);
@@ -88,8 +70,8 @@ $(document).on("click", "#search-btn",
             recommend: $("[name='recommend']").prop('checked'),
             page: "0"
         }
-        ajaxPost(URL_BLOG_SEARCH, data);
-        history.pushState(new StatePost(URL_BLOG_SEARCH, data), null, URL_BLOG_SEARCH);
+        ajaxPost(URL_BLOG_SEARCH, data, "#table-container");
+        history.pushState(new StatePost(URL_BLOG_SEARCH, data, "#table-container"), null, URL_BLOG_SEARCH);
     }
 )
 
@@ -106,28 +88,11 @@ function otherPage (pageNumber) {
         recommend: $("[name='recommend']").prop('checked'),
         page: pageNumber
     };
-    ajaxPost(URL_BLOG_SEARCH, data);
-    history.pushState(new StatePost(URL_BLOG_SEARCH, data), null, URL_BLOG_SEARCH);
+    ajaxPost(URL_BLOG_SEARCH, data, "#table-container");
+    history.pushState(new StatePost(URL_BLOG_SEARCH, data, "#table-container"), null, URL_BLOG_SEARCH);
 }
 
-function ajaxPost (url, postData) {
-    $.ajax({
-        url: url,
-        type: "POST",
-        data: postData,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
-        },
-        success: function (data) {
-            $("#ajax-response").html(data)
-        }
-    })
-}
 
-function StatePost(url, data) {
-    this.url = url;
-    this.data = data;
-}
 /** ------------------- blog post ------------------------ */
 
 
@@ -201,10 +166,10 @@ function nextTagPage (pageNumber) {
     ajaxGet(url);
     history.pushState(new StateGet(url), null, url);
 }
-
-function postTag(tagId){
+/* post tag */
+function postTag(){
     let url;
-    tagId = $("[name='id']").val();
+    let tagId = $("[name='id']").val();
     if (tagId == null){
         url = "/admin/tags";
     } else{
@@ -214,27 +179,102 @@ function postTag(tagId){
         id:     $("[name='id']").val(),
         name:   $("[name='name']").val()
     }
-    $.ajax({
-        url: url,
-        type: "POST",
-        data: data,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
-        },
-        success: function (data) {
-            $("#ajax-response").html(data)
-        }
-    })
+    ajaxPost(url, data);
     history.pushState(new StateGet(url), null, url);
 }
 
 /** ------------------- types ------------------------ */
 
+function previousTypePage (pageNumber) {
+    let url = "/admin/types/" + pageNumber-1;
+    ajaxGet(url);
+    history.pushState(new StateGet(url), null, url);
+}
+
+function nextTypePage (pageNumber) {
+    let url = "/admin/types/" + pageNumber+1;
+    ajaxGet(url);
+    history.pushState(new StateGet(url), null, url);
+}
+function addType () {
+    let url = "/admin/types/update";
+    ajaxGet(url);
+    history.pushState(new StateGet(url), null, url);
+}
+function editType (typeId) {
+    let url = "/admin/types/" + typeId + "/update";
+    ajaxGet(url)
+    history.pushState(new StateGet(url), null, url);
+}
+
+function deleteType (typeId) {
+    let url = "/admin/types/" + typeId + "/delete";
+    ajaxGet(url)
+    history.pushState(new StateGet(url), null, url);
+}
+
+/* post type */
+function postType(){
+    let url;
+    let typeId = $("[name='id']").val();
+    if (typeId == null){
+        url = "/admin/types";
+    } else{
+        url = "/admin/types/" + typeId ;
+    }
+    let data = {
+        id:     $("[name='id']").val(),
+        name:   $("[name='name']").val()
+    }
+    ajaxPost(url, data);
+    history.pushState(new StateGet(url), null, url);
+}
+
+
+/** functions */
+function StateGet(url) {
+    this.url = url;
+}
+
+function StatePost(url, data, selector) {
+    this.url = url;
+    this.data = data;
+    this.selector = selector;
+}
+
+function ajaxGet(url) {
+    $.ajax({
+        url: url,
+        type: "GET",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
+        },
+        success: function (data) {
+            $("#ajax-response").html(data);
+        }
+    })
+}
+
+function ajaxPost (url, postData, selector="#ajax-response") {
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: postData,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
+        },
+        success: function (data) {
+            $(selector).html(data)
+        }
+    })
+}
 
 window.onpopstate = function (e) {
     if (e.state.data == null){
         ajaxGet(e.state.url);
+    } else if(e.state.selector == null){
+        ajaxPost(e.state.url, e.state.data);
     } else {
-        ajaxPost(e.state.url, e.state.data)
+        ajaxPost(e.state.url, e.state.data, e.state.selector);
     }
 }

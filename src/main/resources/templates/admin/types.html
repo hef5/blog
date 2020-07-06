@@ -1,5 +1,5 @@
 <!-- context -->
-<div class="m-container-small m-padded-tb-big">
+<div class="m-container-small m-padded-tb-big" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="ui container">
         <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
             <i class="close icon"></i>
@@ -20,10 +20,8 @@
                     <td th:text="${iterStat.count}">1</td>
                     <td th:text="${type.name}">刻意练习清单</td>
                     <td>
-                        <a class="ui mini teal button" href="#"
-                           th:href="@{/admin/types/{id}/update(id=${type.id})}">编辑</a>
-                        <a class="ui mini teal button" href="#"
-                           th:href="@{/admin/types/{id}/delete(id=${type.id})}">删除</a>
+                        <a class="ui mini teal button" th:onclick="|editType(${type.id})|">编辑</a>
+                        <a class="ui mini teal button" th:onclick="|deleteType(${type.id})|">删除</a>
                     </td>
                 </tr>
                 </tbody>
@@ -31,13 +29,13 @@
                 <tr>
                     <th colspan="6">
                         <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
-                            <a class="icon item" href="#" th:href="@{/admin/types/(page=${page.number}-1)}"
+                            <a class="icon item" th:onclick="|previousTypePage(${page.number})|"
                                th:unless="${page.first}">上一页</a>
-                            <a class="icon item" href="#" th:href="@{/admin/types/(page=${page.number}+1)}"
+                            <a class="icon item" th:onclick="|nextTypePage(${page.number})|"
                                th:unless="${page.last}">下一页</a>
                         </div>
-                        <a class="ui mini right floated teal basic button" href="#"
-                           th:href="@{/admin/types/update}">新增</a>
+                        <a class="ui mini right floated teal basic button" onclick="addType()">
+                            新增</a>
                     </th>
                 </tr>
                 </tfoot>
