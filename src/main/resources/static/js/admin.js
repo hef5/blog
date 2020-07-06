@@ -56,7 +56,7 @@ $("#userName").text(sessionStorage.getItem('userName')),
 $("#userAvatar").attr("src", sessionStorage.getItem('userAvatar'))
 
 
-/** ------------------- blog list Module ------------------------ */
+/** ------------------- blog get ------------------------ */
 function confirmDelete(blogId) {
     let url = "/admin/blogs/" + blogId + "/delete";
     // noinspection JSUnresolvedFunction
@@ -127,6 +127,42 @@ function StatePost(url, data) {
     this.url = url;
     this.data = data;
 }
+
+/** ------------------- blog post ------------------------ */
+function saveBlog() {
+    let data = {
+        published:      false,
+        id:             $("[name='id']").val(),
+        flag:           $("[name='flag']").val(),
+        title:          $("[name='title']").val(),
+        description:    $("[name='description']").val(),
+        type:           $("[name='type.id']").val(),
+        tagIds:         $("[name='tagIds']").val(),
+        firstPicture:   $("[name='firstPicture']").val(),
+        recommend:      $("[name='recommend']").prop('checked'),
+        shareStatement: $("[name='shareStatement']").prop('checked'),
+        appreciation:   $("[name='appreciation']").prop('checked'),
+        commentAllowed: $("[name='commentAllowed']").prop('checked')
+    };
+    $.ajax({
+        url: "/admin/blogs",
+        type: "POST",
+        data: data,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
+        },
+        success: function (data) {
+            $("#ajax-response").html(data)
+        }
+    })
+}
+
+
+
+
+
+/** ------------------- tags ------------------------ */
+
 
 window.onpopstate = function (e) {
     if (e.state.data == null){

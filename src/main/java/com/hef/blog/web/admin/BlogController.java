@@ -1,8 +1,6 @@
 package com.hef.blog.web.admin;
 
 import com.hef.blog.entity.Blog;
-import com.hef.blog.entity.Tag;
-import com.hef.blog.entity.User;
 import com.hef.blog.service.BlogService;
 import com.hef.blog.service.TagService;
 import com.hef.blog.service.TypeService;
@@ -18,9 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -84,8 +79,8 @@ public class BlogController {
 
     // save the blog from blog-input.html
     @PostMapping("/blogs")
-    public String post(Blog blog, RedirectAttributes attributes, HttpSession session){
-        blog.setUser((User) session.getAttribute("user"));
+    public String post(Blog blog, RedirectAttributes attributes){
+
         blog.setType(typeService.getType(blog.getType().getId()));
         System.out.println(blog.getTagIds());
 
