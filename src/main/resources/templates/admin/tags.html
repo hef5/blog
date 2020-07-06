@@ -34,7 +34,7 @@
                                     <a th:onclick="|previousTagPage(${page.number})|" class="icon item" th:unless="${page.first}">上一页</a>
                                     <a th:onclick="|nextTagPage(${page.number})|" class="icon item" th:unless="${page.last}">下一页</a>
                                 </div>
-                                <a href="#" onclick="addTags()" class="ui mini right floated teal basic button">新增</a>
+                                <a onclick="addTags()" class="ui mini right floated teal basic button">新增</a>
                             </th>
                         </tr>
                     </tfoot>

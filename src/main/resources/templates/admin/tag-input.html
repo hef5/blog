@@ -1,46 +1,39 @@
 <!-- context -->
 <div class="m-container-small m-padded-tb-big" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="ui container">
-        <form action="#" method="POST" th:object="${tag}" th:action="*{id}==null ? @{/admin/tags} : @{/admin/tags/{id}(id=*{id})}" class="ui form">
-            <input type="hidden" name="id" th:value="*{id}">
+        <div class="ui form" th:object="${tag}">
+            <input type="hidden" name="id" th:field="*{id}">
             <div class="field">
 
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">名称</label>
-                    <input type="text" name="name" placeholder="分类名称" th:value="*{name}">
+                    <input type="text" name="name" placeholder="分类名称" th:field="*{name}">
                 </div>
             </div>
             <div class="ui error message"></div>
-            <!--/*/
+
             <div class="ui negative message" th:if="${#fields.hasErrors('name')}">
                 <i class="close icon"></i>
                 <div class="header">验证失败</div>
                 <p th:errors="*{name}">不得为空</p>
             </div>
-            /*/-->
+
 
             <div class="ui right aligned container">
                 <button type="button" class="ui button" onclick="window.history.go(-1)">
                     返回
                 </button>
-                <button class="ui teal submit button">提交</button>
+                <button onclick="postTag()" class="ui teal submit button">提交</button>
             </div>
 
 
-        </form>
+        </div>
     </div>
 </div>
 
 
 <script>
 
-    $(".menu.toggle").click(function () {
-        $(".m-item").toggleClass("m-mobile-hide");
-    });
-
-    $('.ui.dropdown').dropdown({
-        on: 'hover'
-    });
 
     $('.ui.form')
         .form({

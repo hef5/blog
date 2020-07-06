@@ -110,7 +110,7 @@ function otherPage (pageNumber) {
     history.pushState(new StatePost(URL_BLOG_SEARCH, data), null, URL_BLOG_SEARCH);
 }
 
-function ajaxPost (url, postData, selector="#table-container") {
+function ajaxPost (url, postData) {
     $.ajax({
         url: url,
         type: "POST",
@@ -119,7 +119,7 @@ function ajaxPost (url, postData, selector="#table-container") {
             xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
         },
         success: function (data) {
-            $(selector).html(data)
+            $("#ajax-response").html(data)
         }
     })
 }
@@ -146,8 +146,8 @@ function saveBlog() {
         appreciation:   $("[name='appreciation']").prop('checked'),
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
-    let selector = "#ajax-response";
-    ajaxPost(URL_BLOG, dataPostBlog, selector)
+
+    ajaxPost(URL_BLOG, dataPostBlog)
     history.pushState(new StateGet(URL_BLOG_INPUT), null, URL_BLOG_INPUT);
 }
 
@@ -167,8 +167,8 @@ function publishBlog() {
         appreciation:   $("[name='appreciation']").prop('checked'),
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
-    let selector = "#ajax-response";
-    ajaxPost(URL_BLOG, dataPostBlog, selector)
+
+    ajaxPost(URL_BLOG, dataPostBlog)
     history.pushState(new StateGet(URL_BLOG_INPUT), null, URL_BLOG_INPUT);
 }
 
@@ -199,6 +199,32 @@ function previousTagPage (pageNumber) {
 function nextTagPage (pageNumber) {
     let url = "/admin/tags/" + pageNumber+1;
     ajaxGet(url);
+    history.pushState(new StateGet(url), null, url);
+}
+
+function postTag(tagId){
+    let url;
+    tagId = $("[name='id']").val();
+    if (tagId == null){
+        url = "/admin/tags";
+    } else{
+        url = "/admin/tags/" + tagId ;
+    }
+    let data = {
+        id:     $("[name='id']").val(),
+        name:   $("[name='name']").val()
+    }
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: data,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
+        },
+        success: function (data) {
+            $("#ajax-response").html(data)
+        }
+    })
     history.pushState(new StateGet(url), null, url);
 }
 
