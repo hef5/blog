@@ -93,6 +93,7 @@ public class BlogController {
         String username = JwtTokenUtils.getUsernameByToken(token);
         User user = userService.getUserByUsername(username);
 
+        blog.setUser(user);
 
         blog.setType(typeService.getType(blog.getType().getId()));
         System.out.println(blog.getTagIds());
@@ -100,7 +101,6 @@ public class BlogController {
 
         Blog blog1;
         if (blog.getId()==null) {
-            blog.setUser(user);
             blog1 = blogService.saveBlog(blog); // create a new blog
         } else {
             blog1 = blogService.updateBlog(blog.getId(), blog); // update a blog

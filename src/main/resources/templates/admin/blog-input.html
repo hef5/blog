@@ -24,7 +24,7 @@
                 <!-- 内容 -->
                 <div class="required field">
                     <div id="md-content" style="z-index: 1 !important;">
-                        <textarea name="content" placeholder="内容" style="display: none;" th:field="*{content}">
+                        <textarea name="content" placeholder="内容" style="display: none;" th:text="*{content}">
                         </textarea>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <!-- description -->
                 <div class="field">
                    <div class="ui input">
-                       <textarea name="description" placeholder="description" maxlength="200" th:field="*{description}">
+                       <textarea name="description" placeholder="description" maxlength="200" th:text="*{description}">
                            </textarea>
                    </div>
                 </div>
