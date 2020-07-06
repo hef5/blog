@@ -3,7 +3,6 @@ package com.hef.blog.service.impl;
 import com.hef.blog.NotFoundException;
 import com.hef.blog.dao.BlogRepository;
 import com.hef.blog.entity.Blog;
-import com.hef.blog.entity.Tag;
 import com.hef.blog.entity.Type;
 import com.hef.blog.service.BlogService;
 import com.hef.blog.util.MarkdownUtils;

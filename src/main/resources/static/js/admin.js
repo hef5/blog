@@ -6,12 +6,14 @@ const URL_BLOG_INPUT  = "/admin/blogs/input";
 const URL_BLOG_SEARCH = "/admin/blogs/search";
 
 
-$("#blogs").on("click",
-    function (e) {
-        ajaxGet(URL_BLOG);
-        history.pushState(new StateGet(URL_BLOG), null, "/admin/blogs.html");
-    }
-),
+
+function blogList(element) {
+    $("#shortMenu a").removeClass("active");
+    $(element).addClass("active");
+    ajaxGet(URL_BLOG);
+    history.pushState(new StateGet(URL_BLOG), null, "/admin/blogs.html");
+}
+
 
 $("#tags").on("click",
     function (e) {
@@ -53,13 +55,13 @@ function confirmDelete(blogId) {
     )
 }
 
-$(document).on("click", "#add-blog",
-    function (e) {
-        e.preventDefault();
-        ajaxGet(URL_BLOG_INPUT);
-        history.pushState(new StateGet(URL_BLOG_INPUT), null, URL_BLOG_INPUT);
-    }
-)
+function addBlog(element) {
+    $("#shortMenu a").removeClass("active");
+    $(element).addClass("active");
+    ajaxGet(URL_BLOG_INPUT);
+    history.pushState(new StateGet(URL_BLOG_INPUT), null, URL_BLOG_INPUT);
+}
+
 
 $(document).on("click", "#search-btn",
     function (e) {

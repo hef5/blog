@@ -55,10 +55,11 @@
                         <div class="content"><a class="header" href="#" th:text="${blog.user.nickname}">鹤峰陈</a></div>
                     </div>
                     <div class="item middle aligned">
-                        <i class="calendar icon"></i> <span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}">2017-10-01</span>
+                        <i class="calendar icon"></i>
+                        <span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd')}" style="vertical-align:sub">2017-10-01</span>
                     </div>
                     <div class="item middle aligned">
-                        <i class="eye icon"></i> <span th:text="${blog.views}">234</span>
+                        <i class="eye icon"></i> <span th:text="${blog.views}" style="vertical-align:sub">234</span>
                     </div>
                 </div>
             </div>
@@ -477,44 +478,7 @@
 
 
 <!-- footer -->
-<footer class="ui segment inverted vertical attached m-padded-tb-massive">
-    <div class="ui center aligned container">
-        <div class="ui divided inverted stackable grid">
-            <div class="three wide column">
-                <div class="ui inverted link list">
-                    <div class="item">
-                        <img alt="wechat" class="ui rounded image" src="../static/images/wechat.jpg"
-                             style="width: 110px">
-                    </div>
-                </div>
-            </div>
-
-            <div class="three wide column">
-                <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
-                <div class="ui inverted link list">
-                    <a class="item" href="#">用户故事(User Story)</a>
-                    <a class="item" href="#">用户故事(User Story)</a>
-                    <a class="item" href="#">用户故事(User Story)</a>
-                </div>
-            </div>
-
-            <div class="three wide column">
-                <h4 class="ui inverted header m-text-thin m-text-spaced">联系我</h4>
-                <div class="ui inverted link list">
-                    <a class="item" href="#">Email: hefeng.chen@gmail.com</a>
-                    <a class="item" href="#">wechat: hefeng</a>
-                </div>
-            </div>
-
-            <div class="seven wide column">
-                <h4 class="ui inverted header m-text-thin m-text-spaced">BLOG</h4>
-                <p class="m-text-thin m-text-spaced m-opacity-mini">喜欢扁平化风格，但是用于个人博客又觉得太严肃。想知道有独特风格的个人博客是什么样的。</p>
-            </div>
-        </div>
-        <div class="ui inverted section divider"></div>
-        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2010-2020 hefeng.com. All Rights Reserved.
-        </p>
-    </div>
+<footer th:replace="_fragments :: footer">
 </footer>
 
 <!-- script -->

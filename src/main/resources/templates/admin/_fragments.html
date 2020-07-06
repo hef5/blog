@@ -14,13 +14,13 @@
         <div class="ui container">
             <div id="nav-menu" class="ui inverted secondary stackable menu">
                 <h2 class="ui item teal header">后台管理</h2>
-                <a id="blogs" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="icon home"></i>博客</a>
+                <a id="blogs" onclick="blogList()" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="icon home"></i>博客</a>
                 <a id="types" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="icon idea"></i>分类</a>
                 <a id="tags" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="icon tags"></i>标签</a>
                 <div class="right m-item menu m-mobile-hide">
                     <div class="ui dropdown item">
                         <div class="text">
-                            <img id="userAvatar" class="ui avatar image" src="https://picsum.photos/id/1/100/100" alt="" >
+                            <img id="userAvatar" class="ui avatar image" alt="#" >
                             <span id="userName">陈鹤峰</span>
                         </div>
                         <i class="dropdown icon"></i>

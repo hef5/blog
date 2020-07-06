@@ -1,9 +1,12 @@
 package com.hef.blog.web.admin;
 
 import com.hef.blog.entity.Blog;
+import com.hef.blog.entity.User;
 import com.hef.blog.service.BlogService;
 import com.hef.blog.service.TagService;
 import com.hef.blog.service.TypeService;
+import com.hef.blog.service.UserService;
+import com.hef.blog.util.JwtTokenUtils;
 import com.hef.blog.vo.BlogQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/admin")
 public class BlogController {
@@ -29,12 +34,15 @@ public class BlogController {
     final private BlogService blogService;
     final private TypeService typeService;
     final private TagService tagService;
+    final private UserService userService;
+
 
     @Autowired
-    public BlogController(BlogService blogService, TypeService typeService, TagService tagService) {
+    public BlogController(BlogService blogService, TypeService typeService, TagService tagService, UserService userService) {
         this.blogService = blogService;
         this.typeService = typeService;
         this.tagService = tagService;
+        this.userService = userService;
     }
 
     // retrieve blogs, types and render them in blogs.html
@@ -79,19 +87,23 @@ public class BlogController {
 
     // save the blog from blog-input.html
     @PostMapping("/blogs")
-    public String post(Blog blog, RedirectAttributes attributes){
+    public String post(Blog blog, RedirectAttributes attributes, HttpServletRequest request){
+
+        String token = request.getHeader("Authorization");
+        String username = JwtTokenUtils.getUsernameByToken(token);
+        User user = userService.getUserByUsername(username);
+
 
         blog.setType(typeService.getType(blog.getType().getId()));
         System.out.println(blog.getTagIds());
-
         blog.setTags(tagService.listTag(blog.getTagIds()));
 
         Blog blog1;
-        // check if the blog is created
         if (blog.getId()==null) {
-            blog1 = blogService.saveBlog(blog);
+            blog.setUser(user);
+            blog1 = blogService.saveBlog(blog); // create a new blog
         } else {
-            blog1 = blogService.updateBlog(blog.getId(), blog);
+            blog1 = blogService.updateBlog(blog.getId(), blog); // update a blog
         }
 
         if ( blog1 == null ){

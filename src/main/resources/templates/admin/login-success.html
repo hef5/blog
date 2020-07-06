@@ -11,42 +11,16 @@
 <body>
     <!-- nav -->
     <nav th:replace="admin/_fragments :: menu(0)" class="ui inverted attached segment m-padded-tb-mini">
-        <div class="ui container">
-            <div class="ui inverted secondary stackable menu">
-                <h2 class="ui item teal header">后台管理</h2>
-                <a href="#" class="m-item item m-mobile-hide"><i class="icon home"></i>首页</a>
-                <a href="#" class="m-item item m-mobile-hide"><i class="icon idea"></i>分类</a>
-                <a href="#" class="m-item item m-mobile-hide"><i class="icon tags"></i>标签</a>
-                <div class="right m-item menu m-mobile-hide">
-                    <div class="ui dropdown item">
-                        <div class="text">
-                            <img src="https://picsum.photos/id/1/100/100" alt="" class="ui avatar image">
-                            陈鹤峰
-                        </div>
-                        <i class="dropdown icon"></i>
-                        <div class="menu">
-                            <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <a href="#" class="ui menu toggle black icon button m-top-right m-mobile-show">
-                <i class="sidebar icon"></i>
-            </a>
-        </div>
     </nav>
-
 
     <div class="ui attached pointing menu">
         <div class="ui container">
-            <div class="right menu">
-                <a href="#" class="item">发布</a>
-                <a href="#" class="active item">列表</a>
+            <div id="shortMenu" class="right menu">
+                <a onclick="addBlog(this)" class="item">发布</a>
+                <a onclick="blogList(this)" class="item">列表</a>
             </div>
         </div>
     </div>
-
 
     <!-- context -->
     <div id="ajax-response">
@@ -112,7 +86,8 @@
 
 
     <script>
-        $(".toggle").click(function () {
+        $(document).on('click', '.toggle',
+            function () {
             $(".m-item").toggleClass("m-mobile-hide");
         });
 
@@ -121,19 +96,18 @@
         });
 
         // close message
-        $(document)
-            .on('click', '.message .close', function () {
+        $(document).on('click', '.message .close',
+            function () {
                 $(this)
                     .closest('.message')
                     .transition('fade');
-            });
+        });
 
-        $(document)
-            .on('click', '#clear-btn', function () {
+        $(document).on('click', '#clear-btn',
+            function () {
                 $('.ui.dropdown')
-                    .dropdown('clear')
-                ;
-            });
+                    .dropdown('clear');
+        });
 
 
     </script>
