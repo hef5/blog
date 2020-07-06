@@ -116,24 +116,20 @@
             $(".m-item").toggleClass("m-mobile-hide");
         });
 
-        $('.ui.dropdown').dropdown({
-            on:'hover'
-        });
-
         $(document).on("dropdown", '.ui.dropdown', {
             on:'hover'
         });
 
         // close message
-        $('.message .close')
-            .on('click', function () {
+        $(document)
+            .on('click', '.message .close', function () {
                 $(this)
                     .closest('.message')
                     .transition('fade');
             });
 
-        $('#clear-btn')
-            .on('click', function () {
+        $(document)
+            .on('click', '#clear-btn', function () {
                 $('.ui.dropdown')
                     .dropdown('clear')
                 ;

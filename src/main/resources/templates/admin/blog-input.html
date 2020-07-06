@@ -121,7 +121,7 @@
                 <div class="ui right aligned container">                   
                     <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
                     <button onclick="saveBlog()" id="save-btn" class="ui secondary button">保存</button>
-                    <button type="button" id="publish-btn" class="ui teal button">发布</button>
+                    <button onclick="publishBlog()" id="publish-btn" class="ui teal button">发布</button>
                 </div>
 
             </div>
@@ -140,7 +140,7 @@
                 allowAdditions: true
             });
 
-        $('#save-btn').click(function(){
+        /*$('#save-btn').click(function(){
             $('[name="published"]').val(false);
             $('#blog-form').submit();
         });
@@ -148,7 +148,7 @@
         $('#publish-btn').click(function(){
             $('[name="published"]').val(true);
             $('#blog-form').submit();
-        });
+        });*/
 
         $(".ui.form").form({
             fields : {

@@ -6,6 +6,7 @@ const URL_BLOG_INPUT  = "/admin/blogs/input";
 const URL_BLOG_SEARCH = "/admin/blogs/search";
 
 
+
 function StateGet(url) {
     this.url = url;
 }
@@ -109,7 +110,7 @@ function otherPage (pageNumber) {
     history.pushState(new StatePost(URL_BLOG_SEARCH, data), null, URL_BLOG_SEARCH);
 }
 
-function ajaxPost (url, postData) {
+function ajaxPost (url, postData, selector="#table-container") {
     $.ajax({
         url: url,
         type: "POST",
@@ -118,7 +119,7 @@ function ajaxPost (url, postData) {
             xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
         },
         success: function (data) {
-            $("#table-container").html(data)
+            $(selector).html(data)
         }
     })
 }
@@ -127,10 +128,11 @@ function StatePost(url, data) {
     this.url = url;
     this.data = data;
 }
-
 /** ------------------- blog post ------------------------ */
+
+
 function saveBlog() {
-    let data = {
+    let dataPostBlog = {
         published:      false,
         id:             $("[name='id']").val(),
         flag:           $("[name='flag']").val(),
@@ -144,24 +146,63 @@ function saveBlog() {
         appreciation:   $("[name='appreciation']").prop('checked'),
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
-    $.ajax({
-        url: "/admin/blogs",
-        type: "POST",
-        data: data,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
-        },
-        success: function (data) {
-            $("#ajax-response").html(data)
-        }
-    })
+    let selector = "#ajax-response";
+    ajaxPost(URL_BLOG, dataPostBlog, selector)
+    history.pushState(new StateGet(URL_BLOG_INPUT), null, URL_BLOG_INPUT);
 }
 
 
-
-
+function publishBlog() {
+    let dataPostBlog = {
+        published:      true,
+        id:             $("[name='id']").val(),
+        flag:           $("[name='flag']").val(),
+        title:          $("[name='title']").val(),
+        description:    $("[name='description']").val(),
+        type:           $("[name='type.id']").val(),
+        tagIds:         $("[name='tagIds']").val(),
+        firstPicture:   $("[name='firstPicture']").val(),
+        recommend:      $("[name='recommend']").prop('checked'),
+        shareStatement: $("[name='shareStatement']").prop('checked'),
+        appreciation:   $("[name='appreciation']").prop('checked'),
+        commentAllowed: $("[name='commentAllowed']").prop('checked')
+    };
+    let selector = "#ajax-response";
+    ajaxPost(URL_BLOG, dataPostBlog, selector)
+    history.pushState(new StateGet(URL_BLOG_INPUT), null, URL_BLOG_INPUT);
+}
 
 /** ------------------- tags ------------------------ */
+function editTags (tagId) {
+    let url = "/admin/tags/" + tagId + "/update";
+    ajaxGet(url)
+    history.pushState(new StateGet(url), null, url);
+}
+
+function deleteTags (tagId) {
+    let url = "/admin/tags/" + tagId + "/delete";
+    ajaxGet(url)
+    history.pushState(new StateGet(url), null, url);
+}
+function addTags () {
+    let url = "/admin/tags/update";
+    ajaxGet(url)
+    history.pushState(new StateGet(url), null, url);
+}
+
+function previousTagPage (pageNumber) {
+    let url = "/admin/tags/" + pageNumber-1;
+    ajaxGet(url);
+    history.pushState(new StateGet(url), null, url);
+}
+
+function nextTagPage (pageNumber) {
+    let url = "/admin/tags/" + pageNumber+1;
+    ajaxGet(url);
+    history.pushState(new StateGet(url), null, url);
+}
+
+/** ------------------- types ------------------------ */
 
 
 window.onpopstate = function (e) {

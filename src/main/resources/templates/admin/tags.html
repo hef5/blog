@@ -1,7 +1,7 @@
 
 
     <!-- context -->
-    <div class="m-container-small m-padded-tb-big">
+    <div class="m-container-small m-padded-tb-big" xmlns:th="http://www.w3.org/1999/xhtml">
         <div class="ui container">
             <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
                 <i class="close icon"></i>
@@ -13,7 +13,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>分类名称</th>
+                            <th>标签名称</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -22,8 +22,8 @@
                             <td th:text="${iterStat.count}">1</td>
                             <td th:text="${tag.name}">刻意练习清单</td>
                             <td>
-                                <a href="#" th:href="@{/admin/tags/{id}/update(id=${tag.id})}" class="ui mini teal button">编辑</a>
-                                <a href="#" th:href="@{/admin/tags/{id}/delete(id=${tag.id})}" class="ui mini teal button">删除</a>
+                                <a th:onclick="|editTags(${tag.id})|" class="ui mini teal button">编辑</a>
+                                <a th:onclick="|deleteTags(${tag.id})|" class="ui mini teal button">删除</a>
                             </td>
                         </tr>
                     </tbody>
@@ -31,10 +31,10 @@
                         <tr>
                             <th colspan="6">
                                 <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
-                                    <a href="#" th:href="@{/admin/tags/(page=${page.number}-1)}" class="icon item" th:unless="${page.first}">上一页</a>
-                                    <a href="#" th:href="@{/admin/tags/(page=${page.number}+1)}" class="icon item" th:unless="${page.last}">下一页</a>
+                                    <a th:onclick="|previousTagPage(${page.number})|" class="icon item" th:unless="${page.first}">上一页</a>
+                                    <a th:onclick="|nextTagPage(${page.number})|" class="icon item" th:unless="${page.last}">下一页</a>
                                 </div>
-                                <a href="#" th:href="@{/admin/tags/update}" class="ui mini right floated teal basic button">新增</a>
+                                <a href="#" onclick="addTags()" class="ui mini right floated teal basic button">新增</a>
                             </th>
                         </tr>
                     </tfoot>
