@@ -9,6 +9,8 @@ import com.hef.blog.service.UserService;
 import com.hef.blog.util.JwtTokenUtils;
 import com.hef.blog.vo.BlogQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -46,20 +48,26 @@ public class BlogController {
     }
 
     // retrieve blogs, types and render them in blogs.html
-    @GetMapping("/blogs")
-    public String blogs(@PageableDefault(size=3, sort ={"updateTime"}, direction = Sort.Direction.DESC)
-                                    Pageable pageable, Model model){
+    @GetMapping("/blogs/{pageNumber}")
+    public String blogs(@PathVariable int pageNumber, Model model){
+        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = PageRequest.of(pageNumber, 5, sort);
+        Page<Blog> page = blogService.listBlog(pageable);
+        model.addAttribute("page", page);
         model.addAttribute("types", typeService.listType());
-        model.addAttribute("page", blogService.listBlog(pageable));
+        model.addAttribute("blog", new BlogQuery());
         return LIST;
     }
 
     // list blogs under the search condition of the given title and type.
-    @PostMapping("/blogs/search")
-    public String search(@PageableDefault(size=3, sort ={"updateTime"}, direction = Sort.Direction.DESC)
-                                     Pageable pageable, BlogQuery blog, Model model){
+    @PostMapping("/blogs/search/{pageNumber}")
+    public String search(@PathVariable int pageNumber, BlogQuery blog, Model model){
+
+        Pageable pageable = PageRequest.of(pageNumber, 5, new Sort(Sort.Direction.DESC, "updateTime"));
         model.addAttribute("page", blogService.listBlog(pageable, blog));
-        return LIST_SEARCH;
+        model.addAttribute("types", typeService.listType());
+        model.addAttribute("blog", blog);
+        return LIST;
     }
 
     private void setTypeAndTag(Model model){

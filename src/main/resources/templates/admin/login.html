@@ -2,11 +2,10 @@
 
 <head th:replace="admin/_fragments :: head(~{::title})">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>登录管理</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.2/dist/semantic.min.css">
-    <link rel="stylesheet" href="../../static/css/me.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.2/dist/semantic.min.css" rel="stylesheet">
+    <link href="../../static/css/me.css" rel="stylesheet">
 </head>
 
 <body>
@@ -23,36 +22,29 @@
                     Log-in to your account
                 </div>
             </h2>
-            <form class="ui large form" method="post" action="#" th:action="@{/admin/login}">
+            <form action="#" class="ui large form" method="post" th:action="@{/admin/login}">
                 <div class="ui segment">
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" name="username" placeholder="username">
+                            <input name="username" placeholder="username" type="text">
                         </div>
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="lock icon"></i>
-                            <input type="password" name="password" placeholder="Password">
+                            <input name="password" placeholder="Password" type="password">
                         </div>
                     </div>
                     <button class="ui fluid large teal submit button">Login</button>
                 </div>
                 <div class="ui error message"></div>
-                <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></div>
+                <div class="ui mini negative message" th:text="${message}"
+                     th:unless="${#strings.isEmpty(message)}"></div>
             </form>
         </div>
     </div>
 </div>
-
-
-</div>
-
-
-
-
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
@@ -60,29 +52,29 @@
 
 <script>
     $(document)
-        .ready(function() {
+        .ready(function () {
             $('.ui.form')
                 .form({
                     fields: {
                         username: {
-                            identifier  : 'username',
+                            identifier: 'username',
                             rules: [
                                 {
-                                    type   : 'empty',
-                                    prompt : 'Please enter your username'
+                                    type: 'empty',
+                                    prompt: 'Please enter your username'
                                 },
                             ]
                         },
                         password: {
-                            identifier  : 'password',
+                            identifier: 'password',
                             rules: [
                                 {
-                                    type   : 'empty',
-                                    prompt : 'Please enter your password'
+                                    type: 'empty',
+                                    prompt: 'Please enter your password'
                                 },
                                 {
-                                    type   : 'length[6]',
-                                    prompt : 'Your password must be at least 6 characters'
+                                    type: 'length[6]',
+                                    prompt: 'Your password must be at least 6 characters'
                                 }
                             ]
                         }
@@ -93,10 +85,7 @@
     ;
 
 
-
 </script>
-
-
 
 
 </body>

@@ -1,17 +1,15 @@
-const URL_BLOG        = "/admin/blogs";
+const URL_BLOG        = "/admin/blogs/0";
 const URL_TYPE        = "/admin/types";
 const URL_TAG         = "/admin/tags";
 const URL_LOGOUT      = "/admin/layout";
 const URL_BLOG_INPUT  = "/admin/blogs/input";
-const URL_BLOG_SEARCH = "/admin/blogs/search";
-
-
+const URL_BLOG_SEARCH = "/admin/blogs/search/0";
 
 function blogList(element) {
     $("#shortMenu a").removeClass("active");
     $(element).addClass("active");
     ajaxGet(URL_BLOG);
-    history.pushState(new StateGet(URL_BLOG), null, "/admin/blogs.html");
+    history.pushState(new StateGet(URL_BLOG), null, URL_BLOG);
 }
 
 
@@ -37,8 +35,10 @@ $("#layout").on("click",
     }
 ),
 
-$("#userName").text(sessionStorage.getItem('userName')),
-$("#userAvatar").attr("src", sessionStorage.getItem('userAvatar'))
+$(function () {
+    $("#userName").text(sessionStorage.getItem('userName'));
+    $("#userAvatar").attr("src", sessionStorage.getItem('userAvatar'))
+})
 
 
 /** ------------------- blog get ------------------------ */
@@ -72,8 +72,8 @@ $(document).on("click", "#search-btn",
             recommend: $("[name='recommend']").prop('checked'),
             page: "0"
         }
-        ajaxPost(URL_BLOG_SEARCH, data, "#table-container");
-        history.pushState(new StatePost(URL_BLOG_SEARCH, data, "#table-container"), null, URL_BLOG_SEARCH);
+        ajaxPost(URL_BLOG_SEARCH, data);
+        history.pushState(new StatePost(URL_BLOG_SEARCH, data), null, URL_BLOG_SEARCH);
     }
 )
 
@@ -84,14 +84,24 @@ function editBlog (blogId) {
 }
 
 function otherPage (pageNumber) {
+    let url;
     let data = {
         title: $("[name='title']").val(),
         typeId: $("[name='typeId']").val(),
         recommend: $("[name='recommend']").prop('checked'),
         page: pageNumber
     };
-    ajaxPost(URL_BLOG_SEARCH, data, "#table-container");
-    history.pushState(new StatePost(URL_BLOG_SEARCH, data, "#table-container"), null, URL_BLOG_SEARCH);
+    if (data.title=="" && data.typeId =="" && data.recommend==false){
+        url = "/admin/blogs/" + pageNumber;
+        ajaxGet(url);
+        history.pushState(new StateGet(url, data), null, url);
+    } else {
+        url = "/admin/search/" + pageNumber;
+        ajaxPost(url, data);
+        history.pushState(new StatePost(url, data), null, url);
+    }
+
+
 }
 
 
@@ -254,12 +264,12 @@ function ajaxGet(url) {
             xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'));
         },
         success: function (data) {
-            $("#ajax-response").html(data);
+            $("#content-container").html(data);
         }
     })
 }
 
-function ajaxPost (url, postData, selector="#ajax-response") {
+function ajaxPost (url, postData, selector="#content-container") {
     $.ajax({
         url: url,
         type: "POST",

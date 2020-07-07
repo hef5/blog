@@ -39,10 +39,10 @@
 
 
 <!-- context -->
-<div id="context" class="ui stackable grid">
-    <div class="three wide column" id="tag-container"></div>
+<div id="content-container" class="ui stackable grid">
+    <div id="tag-container" class="three wide column" ></div>
 
-    <div class="ten wide column" id="blog-container">
+    <div id="blog-container" class="ten wide column" >
 
         <div class="ui container m-padded-tb-big" >
 
@@ -74,7 +74,7 @@
             </div>
 
             <!-- 内容(正文)-->
-            <div id="content-container" class="ui basic segment">
+            <div id="text-content" class="ui basic segment">
                 <div class="ui right aligned basic segment">
                     <div class="ui orange basic label" th:text="${blog.flag}">原创</div>
                 </div>
@@ -454,24 +454,11 @@
     </div>
 
     <!-- toc : table of content -->
-    <div class="three wide column" id="toc-container">
+    <div id="toc-container" class="three wide column" >
         <!-- 浮动目录 -->
-        <!--<div class="m-padded-mini m-fixed m-right-bottom">
-            <div class="ui vertical icon buttons">
-                <button class="ui toc teal button">目录</button>
-                <a href="#comment-container" class="ui teal button">留言</a>
-                <button class="ui icon button"><i class="icon weixin"></i></button>
-                <a href="#" class="ui icon button"><i class="chevron up icon"></i></a>
-            </div>
-        </div>-->
         <div id="toc-position">
             <div class="js-toc toc-list toc m-fixed" id="toc"></div>
         </div>
-
-
-        <!--  <div class="ui toc-container" style="width: 200px;">
-          </div>-->
-
 
     </div>
 </div>

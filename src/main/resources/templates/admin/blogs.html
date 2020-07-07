@@ -1,17 +1,17 @@
 
 <!-- context -->
-<div class="m-container-small m-padded-tb-big">
+<div class="m-container-small m-padded-tb-big" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="ui container">
-        <div class="ui secondary segment form">
+        <div class="ui secondary segment form" th:object="${blog}">
             <input id="pageNumber" type="hidden">
             <div class="inline fields">
                 <div class="field">
-                    <input name="title" placeholder="标题" type="text">
+                    <input name="title" placeholder="标题" type="text" th:field="*{title}">
                 </div>
                 <div class="field">
                     <div class="ui labeled action input">
                         <div class="ui selection dropdown">
-                            <input name="typeId" type="hidden">
+                            <input name="typeId" type="hidden" th:field="*{typeId}">
                             <i class="dropdown icon"></i>
                             <div class="default text">分类</div>
                             <div class="menu">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input id="recommend" name="recommend" type="checkbox">
+                        <input id="recommend" name="recommend" type="checkbox" th:field="*{recommend}">
                         <label for="recommend">推荐</label>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="ui segment" id="table-container">
-            <table class="ui celled table" th:fragment="blogList">
+            <table class="ui celled table">
                 <thead>
                 <tr>
                     <th></th>

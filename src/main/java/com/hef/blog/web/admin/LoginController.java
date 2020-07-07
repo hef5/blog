@@ -45,7 +45,7 @@ public class LoginController {
         if (user != null){
 
             user.setPassword(null);
-            /** session.setAttribute("user", user); */
+            /* session.setAttribute("user", user); */
 
             // if username password correct, then generate token and set response header
             String token = JwtTokenUtils.generateToken(username);
