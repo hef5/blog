@@ -2,7 +2,7 @@
 <!-- context -->
 <div class="m-container-small m-padded-tb-big" xmlns:th="http://www.w3.org/1999/xhtml">
     <div class="ui container">
-        <div class="ui secondary segment form" th:object="${blog}">
+        <div class="ui secondary attached segment form" th:object="${blog}">
             <input id="pageNumber" type="hidden">
             <div class="inline fields">
                 <div class="field">
@@ -34,13 +34,13 @@
                     </div>
                 </div>
                 <div class="field">
-                    <button class="ui mini teal basic button" id="search-btn" type="button"><i class="search icon"></i>搜索
+                    <button onclick="searchBlog()" class="ui mini teal basic button" id="search-btn" type="button"><i class="search icon"></i>搜索
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="ui segment" id="table-container">
+        <div class="ui basic segment" id="table-container" style="background-color: #eeeeee">
             <table class="ui celled table">
                 <thead>
                 <tr>

@@ -31,7 +31,7 @@ public class BlogController {
     private static final String INPUT = "admin/blog-input";
     private static final String LIST = "admin/blogs";
     private static final String REDIRECT_LIST = "redirect:/admin/blogs";
-    private static final String LIST_SEARCH = "admin/blogs :: blogList";
+    // private static final String LIST_SEARCH = "admin/blogs :: blogList";
 
     final private BlogService blogService;
     final private TypeService typeService;

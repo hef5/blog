@@ -1,9 +1,28 @@
-const URL_BLOG        = "/admin/blogs/0";
-const URL_TYPE        = "/admin/types";
-const URL_TAG         = "/admin/tags";
-const URL_LOGOUT      = "/admin/layout";
-const URL_BLOG_INPUT  = "/admin/blogs/input";
+const URL_BLOG = "/admin/blogs/0";
+const URL_TYPE = "/admin/types";
+const URL_TAG = "/admin/tags";
+const URL_LOGOUT = "/admin/logout";
+const URL_BLOG_INPUT = "/admin/blogs/input";
 const URL_BLOG_SEARCH = "/admin/blogs/search/0";
+const URL_LOGIN = "/admin/login";
+
+
+/** login, logout, nav menu */
+function login() {
+    let data = {
+        username: $("[name='username']").val(),
+        password: $("[name='password']").val()
+    }
+    $.ajax({
+        url: URL_LOGIN,
+        type: "POST",
+        data: data,
+        success: function (data, textStatus, jqXHR) {
+            $("body").html(data);
+            sessionStorage.setItem('token', jqXHR.getResponseHeader('Authorization'));
+        }
+    })
+}
 
 function blogList(element) {
     $("#shortMenu a").removeClass("active");
@@ -12,36 +31,28 @@ function blogList(element) {
     history.pushState(new StateGet(URL_BLOG), null, URL_BLOG);
 }
 
+function tagList(){
+    ajaxGet(URL_TAG);
+    history.pushState(new StateGet(URL_TAG), null, URL_TAG);
+}
 
-$("#tags").on("click",
-    function (e) {
-        ajaxGet(URL_TAG);
-        history.pushState(new StateGet(URL_TAG), null, "/admin/tags.html");
-    }
-),
+function typeList() {
+    ajaxGet(URL_TYPE)
+    history.pushState(new StateGet(URL_TYPE), URL_TYPE);
+}
 
-$("#types").on("click",
-    function (e) {
-        ajaxGet(URL_TYPE)
-        history.pushState(new StateGet(URL_TYPE), null, "/admin/types.html");
-    }
-),
+$(document).on('click', '#logout',
+    function () {
+        sessionStorage.removeItem("token");
+    });
 
-$("#layout").on("click",
-    function (e, token) {
-        e.preventDefault();
-        ajaxGet(URL_LOGOUT)
-        history.pushState(new StateGet(URL_LOGOUT), null, "/admin/blogs.html");
-    }
-),
+/*function logout() {
+    ajaxGet(URL_LOGOUT)
+    sessionStorage.removeItem("token");
+    history.pushState(new StateGet(URL_LOGOUT), null, "/admin/blogs.html");
+}*/
 
-$(function () {
-    $("#userName").text(sessionStorage.getItem('userName'));
-    $("#userAvatar").attr("src", sessionStorage.getItem('userAvatar'))
-})
-
-
-/** ------------------- blog get ------------------------ */
+/** blog get */
 function confirmDelete(blogId) {
     let url = "/admin/blogs/" + blogId + "/delete";
     // noinspection JSUnresolvedFunction
@@ -62,28 +73,24 @@ function addBlog(element) {
     history.pushState(new StateGet(URL_BLOG_INPUT), null, URL_BLOG_INPUT);
 }
 
-
-$(document).on("click", "#search-btn",
-    function (e) {
-        e.preventDefault();
-        let data = {
-            title: $("[name='title']").val(),
-            typeId: $("[name='typeId']").val(),
-            recommend: $("[name='recommend']").prop('checked'),
-            page: "0"
-        }
-        ajaxPost(URL_BLOG_SEARCH, data);
-        history.pushState(new StatePost(URL_BLOG_SEARCH, data), null, URL_BLOG_SEARCH);
+function searchBlog() {
+    let data = {
+        title: $("[name='title']").val(),
+        typeId: $("[name='typeId']").val(),
+        recommend: $("[name='recommend']").prop('checked'),
+        page: "0"
     }
-)
+    ajaxPost(URL_BLOG_SEARCH, data);
+    history.pushState(new StatePost(URL_BLOG_SEARCH, data), null, URL_BLOG_SEARCH);
+}
 
-function editBlog (blogId) {
+function editBlog(blogId) {
     let url = "/admin/blogs/" + blogId + "/update";
     ajaxGet(url)
     history.pushState(new StateGet(url), null, url);
 }
 
-function otherPage (pageNumber) {
+function otherPage(pageNumber) {
     let url;
     let data = {
         title: $("[name='title']").val(),
@@ -91,12 +98,12 @@ function otherPage (pageNumber) {
         recommend: $("[name='recommend']").prop('checked'),
         page: pageNumber
     };
-    if (data.title=="" && data.typeId =="" && data.recommend==false){
+    if (data.title == "" && data.typeId == "" && data.recommend == false) {
         url = "/admin/blogs/" + pageNumber;
         ajaxGet(url);
         history.pushState(new StateGet(url, data), null, url);
     } else {
-        url = "/admin/search/" + pageNumber;
+        url = "/admin/blogs/search/" + pageNumber;
         ajaxPost(url, data);
         history.pushState(new StatePost(url, data), null, url);
     }
@@ -105,23 +112,21 @@ function otherPage (pageNumber) {
 }
 
 
-/** ------------------- blog post ------------------------ */
-
-
+/** blog post */
 function saveBlog() {
     let dataPostBlog = {
-        published:      false,
-        id:             $("[name='id']").val(),
-        flag:           $("[name='flag']").val(),
-        title:          $("[name='title']").val(),
-        content:        $("[name='content']").val(),
-        description:    $("[name='description']").val(),
-        type:           $("[name='type.id']").val(),
-        tagIds:         $("[name='tagIds']").val(),
-        firstPicture:   $("[name='firstPicture']").val(),
-        recommend:      $("[name='recommend']").prop('checked'),
+        published: false,
+        id: $("[name='id']").val(),
+        flag: $("[name='flag']").val(),
+        title: $("[name='title']").val(),
+        content: $("[name='content']").val(),
+        description: $("[name='description']").val(),
+        type: $("[name='type.id']").val(),
+        tagIds: $("[name='tagIds']").val(),
+        firstPicture: $("[name='firstPicture']").val(),
+        recommend: $("[name='recommend']").prop('checked'),
         shareStatement: $("[name='shareStatement']").prop('checked'),
-        appreciation:   $("[name='appreciation']").prop('checked'),
+        appreciation: $("[name='appreciation']").prop('checked'),
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
 
@@ -132,18 +137,18 @@ function saveBlog() {
 
 function publishBlog() {
     let dataPostBlog = {
-        published:      true,
-        id:             $("[name='id']").val(),
-        flag:           $("[name='flag']").val(),
-        title:          $("[name='title']").val(),
-        content:        $("[name='content']").val(),
-        description:    $("[name='description']").val(),
-        type:           $("[name='type.id']").val(),
-        tagIds:         $("[name='tagIds']").val(),
-        firstPicture:   $("[name='firstPicture']").val(),
-        recommend:      $("[name='recommend']").prop('checked'),
+        published: true,
+        id: $("[name='id']").val(),
+        flag: $("[name='flag']").val(),
+        title: $("[name='title']").val(),
+        content: $("[name='content']").val(),
+        description: $("[name='description']").val(),
+        type: $("[name='type.id']").val(),
+        tagIds: $("[name='tagIds']").val(),
+        firstPicture: $("[name='firstPicture']").val(),
+        recommend: $("[name='recommend']").prop('checked'),
         shareStatement: $("[name='shareStatement']").prop('checked'),
-        appreciation:   $("[name='appreciation']").prop('checked'),
+        appreciation: $("[name='appreciation']").prop('checked'),
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
 
@@ -151,47 +156,49 @@ function publishBlog() {
     history.pushState(new StateGet(URL_BLOG_INPUT), null, URL_BLOG_INPUT);
 }
 
-/** ------------------- tags ------------------------ */
-function editTags (tagId) {
+/** tags */
+function editTags(tagId) {
     let url = "/admin/tags/" + tagId + "/update";
     ajaxGet(url)
     history.pushState(new StateGet(url), null, url);
 }
 
-function deleteTags (tagId) {
+function deleteTags(tagId) {
     let url = "/admin/tags/" + tagId + "/delete";
     ajaxGet(url)
     history.pushState(new StateGet(url), null, url);
 }
-function addTags () {
+
+function addTags() {
     let url = "/admin/tags/update";
     ajaxGet(url)
     history.pushState(new StateGet(url), null, url);
 }
 
-function previousTagPage (pageNumber) {
-    let url = "/admin/tags/" + pageNumber-1;
+function previousTagPage(pageNumber) {
+    let url = "/admin/tags/" + pageNumber - 1;
     ajaxGet(url);
     history.pushState(new StateGet(url), null, url);
 }
 
-function nextTagPage (pageNumber) {
-    let url = "/admin/tags/" + pageNumber+1;
+function nextTagPage(pageNumber) {
+    let url = "/admin/tags/" + pageNumber + 1;
     ajaxGet(url);
     history.pushState(new StateGet(url), null, url);
 }
-/* post tag */
-function postTag(){
+
+/** post tag */
+function postTag() {
     let url;
     let tagId = $("[name='id']").val();
-    if (tagId == null){
+    if (tagId == null) {
         url = "/admin/tags";
-    } else{
-        url = "/admin/tags/" + tagId ;
+    } else {
+        url = "/admin/tags/" + tagId;
     }
     let data = {
-        id:     $("[name='id']").val(),
-        name:   $("[name='name']").val()
+        id: $("[name='id']").val(),
+        name: $("[name='name']").val()
     }
     ajaxPost(url, data);
     history.pushState(new StateGet(url), null, url);
@@ -199,46 +206,48 @@ function postTag(){
 
 /** ------------------- types ------------------------ */
 
-function previousTypePage (pageNumber) {
-    let url = "/admin/types/" + pageNumber-1;
+function previousTypePage(pageNumber) {
+    let url = "/admin/types/" + pageNumber - 1;
     ajaxGet(url);
     history.pushState(new StateGet(url), null, url);
 }
 
-function nextTypePage (pageNumber) {
-    let url = "/admin/types/" + pageNumber+1;
+function nextTypePage(pageNumber) {
+    let url = "/admin/types/" + pageNumber + 1;
     ajaxGet(url);
     history.pushState(new StateGet(url), null, url);
 }
-function addType () {
+
+function addType() {
     let url = "/admin/types/update";
     ajaxGet(url);
     history.pushState(new StateGet(url), null, url);
 }
-function editType (typeId) {
+
+function editType(typeId) {
     let url = "/admin/types/" + typeId + "/update";
     ajaxGet(url)
     history.pushState(new StateGet(url), null, url);
 }
 
-function deleteType (typeId) {
+function deleteType(typeId) {
     let url = "/admin/types/" + typeId + "/delete";
     ajaxGet(url)
     history.pushState(new StateGet(url), null, url);
 }
 
-/* post type */
-function postType(){
+/** post type */
+function postType() {
     let url;
     let typeId = $("[name='id']").val();
-    if (typeId == null){
+    if (typeId == null) {
         url = "/admin/types";
-    } else{
-        url = "/admin/types/" + typeId ;
+    } else {
+        url = "/admin/types/" + typeId;
     }
     let data = {
-        id:     $("[name='id']").val(),
-        name:   $("[name='name']").val()
+        id: $("[name='id']").val(),
+        name: $("[name='name']").val()
     }
     ajaxPost(url, data);
     history.pushState(new StateGet(url), null, url);
@@ -269,7 +278,7 @@ function ajaxGet(url) {
     })
 }
 
-function ajaxPost (url, postData, selector="#content-container") {
+function ajaxPost(url, postData, selector = "#content-container") {
     $.ajax({
         url: url,
         type: "POST",
@@ -284,11 +293,12 @@ function ajaxPost (url, postData, selector="#content-container") {
 }
 
 window.onpopstate = function (e) {
-    if (e.state.data == null){
+    if (e.state.data == null) {
         ajaxGet(e.state.url);
-    } else if(e.state.selector == null){
+    } else if (e.state.selector == null) {
         ajaxPost(e.state.url, e.state.data);
     } else {
         ajaxPost(e.state.url, e.state.data, e.state.selector);
     }
 }
+

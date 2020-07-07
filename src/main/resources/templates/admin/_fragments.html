@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.css" th:href="@{/lib/editormd/css/editormd.css}">
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script th:src="@{/js/admin.js}" type="text/javascript"></script>
 </head>
 <body>
     <!-- nav -->
@@ -15,13 +17,13 @@
             <div id="nav-menu" class="ui inverted secondary stackable menu" style="margin-bottom: 0px">
                 <h2 class="ui item teal header">后台管理</h2>
                 <a id="blogs" onclick="blogList()" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="icon home"></i>博客</a>
-                <a id="types" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="icon idea"></i>分类</a>
-                <a id="tags" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="icon tags"></i>标签</a>
+                <a id="types" onclick="typeList()" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="icon idea"></i>分类</a>
+                <a id="tags" onclick="tagList()" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="icon tags"></i>标签</a>
                 <div class="right m-item menu m-mobile-hide">
                     <div class="ui dropdown item">
                         <div class="text">
-                            <img id="userAvatar" onload="sessionStorage.getItem('userAvatar')" class="ui avatar image" alt="#" >
-                            <span id="userName" onload="sessionStorage.getItem('userName')">陈鹤峰</span>
+                            <img id="userAvatar" th:src="${user.avatar}" class="ui avatar image" alt="#" >
+                            <span id="userName" th:text="${user.nickname}">陈鹤峰</span>
                         </div>
                         <i class="dropdown icon"></i>
                         <div class="menu">

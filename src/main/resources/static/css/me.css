@@ -6,6 +6,16 @@ body{
     background-color: #7382a3 !important;
 }
 
+#content-container .ui.button{
+    background-color: #60677f !important;
+    color: white !important;
+}
+
+#content-container .ui.label{
+    background-color: #60677f !important;
+    color: white !important;
+}
+
 #content-container{
     min-height: 100% !important;
 }

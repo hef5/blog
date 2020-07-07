@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -38,6 +39,7 @@ public class LoginController {
     public String login(@RequestParam String username,
                         @RequestParam String password,
                         RedirectAttributes attributes,
+                        HttpServletResponse response,
                         Model model){
 
         User user = userService.checkUser(username, password);
@@ -51,7 +53,7 @@ public class LoginController {
             String token = JwtTokenUtils.generateToken(username);
 
             model.addAttribute("user", user);
-            model.addAttribute("token", token);
+            response.setHeader("Authorization", token);
 
             return LOGIN_SUCCESS;
         } else {
