@@ -57,11 +57,11 @@
                         <span>
                             <i class="mini teal circle icon"></i>
                             <span th:text="${blog.title}">关于刻意练习的清单</span>
-                            <div class="ui teal basic left pointing label m-padded-mini"
+                            <div class="ui blue left pointing label m-padded-mini"
                                  th:text="${#dates.format(blog.updateTime,'MMMdd')}">9月03
                             </div>
                         </span>
-                        <div th:text="${blog.flag}" class="ui orange basic left pointing label m-padded-mini">原创</div>
+                        <div th:text="${blog.flag}" class="ui orange basic label m-padded-mini">原创</div>
                     </a>
                 </div>
             </th:block>

@@ -6,15 +6,15 @@ body{
     background-color: #7382a3 !important;
 }
 
-#content-container .ui.button{
+/*#content-container .ui.button{
     background-color: #60677f !important;
-    color: white !important;
+    color: #EEEEEE !important;
 }
 
 #content-container .ui.label{
     background-color: #60677f !important;
-    color: white !important;
-}
+    color: #eeeeee !important;
+}*/
 
 #content-container{
     min-height: 100% !important;
@@ -159,6 +159,13 @@ body{
 .m-mobile-show{
     display: none !important;
 }
+
+
+.m-button{
+    background-color: #60677f !important;
+    color: white !important;
+}
+
 
 @media screen and (max-width: 768px){
     .m-mobile-hide{

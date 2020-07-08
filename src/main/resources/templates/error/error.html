@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="_fragments :: head(~{::title})" >
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>错误</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
 </head>
 <body>
-    <h1>错误</h1>
+
+<br>
+<br>
+<div id="content-container" class="m-container-small m-padded-tb-massive">
+    <div class="ui error message m-padded-tb-huge">
+        <div class="ui container">
+            <h2>未知异常， 请联系管理员 chhefeng@gmail.com</h2>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
 
     <div>
         <div th:utext="'&lt;!--'" th:remove="tag"></div>

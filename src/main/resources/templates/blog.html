@@ -15,7 +15,7 @@
 <body>
 
 <!-- nav -->
-<nav class="ui inverted attached segment m-padded-tb-mini" th:replace="_fragments :: menu(2)">
+<nav th:replace="_fragments :: menu(0)" class="ui inverted attached segment m-padded-tb-mini" >
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui item header" style="color: #ecb49f">Blog</h2>
@@ -68,7 +68,7 @@
             <div class="ui basic segment">
             <!--<div id="first-picture"></div>-->
 
-                <img alt="#" class="ui big centered image"
+                <img alt="#" class="ui centered image"
                      src="https://www.dw.com/image/45543201_403.jpg"
                      th:src="@{${blog.firstPicture}}">
             </div>
@@ -143,7 +143,7 @@
 
                 <!-- 标签 -->
                 <div class="m-padded-lr-responsive">
-                    <div class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">
+                    <div class="ui violet tag label" th:each="tag : ${blog.tags}" th:text="${tag.name}">
                         新闻
                     </div>
                 </div>

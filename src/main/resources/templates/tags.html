@@ -50,7 +50,7 @@
             </div>
 
             <div class="ui attached segment m-padded-tb-large content-bgc">
-                <a href="#" th:each="tag : ${tags}" th:href="@{/tags/{id}(id=${tag.id})}" class="ui teal basic label m-margin-tb-tiny">
+                <a href="#" th:each="tag : ${tags}" th:href="@{/tags/{id}(id=${tag.id})}" th:classappend="${tag.id==activeTagId} ? 'grey'" class="ui label m-margin-tb-tiny">
                     <span th:text="${tag.name}">数学</span>
                     <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
                 </a>
@@ -90,12 +90,12 @@
                                         </div>
                                     </div>
                                     <div class="five wide column middle aligned">
-                                        <a href="#" th:text="${blog.type.name}" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
+                                        <a href="#" th:text="${blog.type.name}" class="ui label m-padded-tiny m-text-thin">认知升级</a>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="column">
-                                        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" th:classappend="${tag.id==activeTagId} ? 'teal'" th:each="tag : ${blog.tags}" th:text="${tag.name}" class="ui basic teal left pointing label m-padded-mini m-text-thin">方法论</a>
+                                        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" th:classappend="${tag.id==activeTagId} ? 'violet'" th:each="tag : ${blog.tags}" th:text="${tag.name}" class="ui blue label m-padded-mini m-text-thin">方法论</a>
                                     </div>
                                 </div>
                             </div>
@@ -151,10 +151,10 @@
             <div class="ui attached segment content-bgc" th:if="${page.totalPages}>1">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <a href="#" th:href="@{/(page=${page.number}-1)}" th:unless="${page.first}" class="ui mini teal basic button">上一页</a>
+                        <a href="#" th:href="@{'/tags/'+${activeTagId}+ '?page=' +${page.number-1}}" th:unless="${page.first}" class="ui button m-button">上一页</a>
                     </div>
                     <div class="right aligned column">
-                        <a href="#" th:href="@{/(page=${page.number}+1)}" th:unless="${page.last}" class="ui mini teal basic button">下一页</a>
+                        <a href="#" th:href="@{'/tags/'+${activeTagId}+ '?page=' +${page.number+1}}" th:unless="${page.last}" class="ui button m-button">下一页</a>
                     </div>
                 </div>
             </div>

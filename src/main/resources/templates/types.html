@@ -55,9 +55,9 @@
 
             <div class="ui attached segment m-padded-tb-large content-bgc">
                 <div th:each="type : ${types}" class="ui labeled button m-margin-tb-tiny">
-                    <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui basic button" th:classappend="${type.id==activeTypeId} ? 'teal'" th:text="${type.name}">思考与感悟</a>
-                    <div class="ui basic left pointing label" style="background-color: #60677f; color: white"
-                         th:classappend="${type.id==activeTypeId} ? 'blue'"
+                    <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="ui button" th:classappend="${type.id==activeTypeId} ? 'grey'" th:text="${type.name}">思考与感悟</a>
+                    <div class="ui left pointing label"
+                         th:classappend="${type.id==activeTypeId} ? 'grey'"
                          th:text="${#arrays.length(type.blogs)}">24
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="five wide column middle aligned">
-                                    <a th:text="${blog.type.name}" href="#" class="ui teal basic label m-padded-tiny m-text-thin">认知升级</a>
+                                    <a th:text="${blog.type.name}" href="#" class="ui label m-padded-tiny m-text-thin">认知升级</a>
                                 </div>
                             </div>
                         </div>
@@ -258,13 +258,13 @@
                 </div>-->
             </div>
 
-            <div class="ui attached segment content-bgc">
+            <div class="ui attached segment content-bgc" th:if="${page.totalPages}>1">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <a href="" class="ui mini teal basic button">上一页</a>
+                        <a href="#" th:href="@{'/types/'+${activeTypeId}+ '?page=' +${page.number-1}}" th:unless="${page.first}" class="ui button m-button">上一页</a>
                     </div>
                     <div class="right aligned column">
-                        <a href="" class="ui mini teal basic button">下一页</a>
+                        <a href="#" th:href="@{'/types/'+${activeTypeId}+ '?page=' +${page.number+1}}" th:unless="${page.last}" class="ui button m-button">下一页</a>
                     </div>
                 </div>
             </div>

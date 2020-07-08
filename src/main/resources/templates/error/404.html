@@ -11,7 +11,7 @@
 
 <body>
 <!-- nav -->
-<nav th:replace="_fragments :: menu(2)" class="ui inverted attached segment m-padded-tb-mini">
+<nav th:replace="_fragments :: menu(0)" class="ui inverted attached segment m-padded-tb-mini">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui item teal header">Blog</h2>
@@ -35,7 +35,7 @@
 
 <br>
 <br>
-<div class="m-container-small m-padded-tb-massive">
+<div id="content-container" class="m-container-small m-padded-tb-massive">
         <div class="ui error message m-padded-tb-huge">
             <div class="ui container">
                 <h2>404</h2>

@@ -130,7 +130,7 @@ function saveBlog() {
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
 
-    ajaxPost(URL_BLOG, dataPostBlog)
+    ajaxPost(URL_BLOG_INPUT, dataPostBlog)
     history.pushState(new StateGet(URL_BLOG_INPUT), null, URL_BLOG_INPUT);
 }
 
@@ -152,7 +152,7 @@ function publishBlog() {
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
 
-    ajaxPost(URL_BLOG, dataPostBlog)
+    ajaxPost(URL_BLOG_INPUT, dataPostBlog)
     history.pushState(new StateGet(URL_BLOG_INPUT), null, URL_BLOG_INPUT);
 }
 

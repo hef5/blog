@@ -16,10 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +27,7 @@ public class BlogController {
 
     private static final String INPUT = "admin/blog-input";
     private static final String LIST = "admin/blogs";
-    private static final String REDIRECT_LIST = "redirect:/admin/blogs";
+    private static final String REDIRECT_LIST = "redirect:/admin/blogs/0";
     // private static final String LIST_SEARCH = "admin/blogs :: blogList";
 
     final private BlogService blogService;
@@ -47,26 +44,35 @@ public class BlogController {
         this.userService = userService;
     }
 
-    // retrieve blogs, types and render them in blogs.html
+    /**
+     * retrieve blogs, types and render them in blogs.html
+     * @param pageNumber
+     * @param blog
+     * @param model
+     * @return
+     */
     @GetMapping("/blogs/{pageNumber}")
-    public String blogs(@PathVariable int pageNumber, Model model){
-        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
-        Pageable pageable = PageRequest.of(pageNumber, 5, sort);
-        Page<Blog> page = blogService.listBlog(pageable);
-        model.addAttribute("page", page);
+    public String blogs(@PathVariable int pageNumber,
+                        @ModelAttribute("blog") BlogQuery blog,  Model model){
+        Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("updateTime").descending());
+        model.addAttribute("page", blogService.listBlog(pageable));
         model.addAttribute("types", typeService.listType());
-        model.addAttribute("blog", new BlogQuery());
         return LIST;
     }
 
-    // list blogs under the search condition of the given title and type.
+    /**
+     * list blogs under the search condition of the given title and type.
+     * @param pageNumber
+     * @param blog
+     * @param model
+     * @return
+     */
     @PostMapping("/blogs/search/{pageNumber}")
-    public String search(@PathVariable int pageNumber, BlogQuery blog, Model model){
-
-        Pageable pageable = PageRequest.of(pageNumber, 5, new Sort(Sort.Direction.DESC, "updateTime"));
+    public String search(@PathVariable int pageNumber,
+                         @ModelAttribute("blog") BlogQuery blog, Model model){
+        Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("updateTime").descending());
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         model.addAttribute("types", typeService.listType());
-        model.addAttribute("blog", blog);
         return LIST;
     }
 
@@ -75,7 +81,11 @@ public class BlogController {
         model.addAttribute("tags", tagService.listTag());
     }
 
-    // create a blog: create a new blog object return blog-input.html
+    /**
+     * create a blog: create a new blog object return blog-input.html
+     * @param model
+     * @return
+     */
     @GetMapping("/blogs/input")
     public String input(Model model){
         setTypeAndTag(model);
@@ -83,7 +93,12 @@ public class BlogController {
         return INPUT;
     }
 
-    // update a blog: get a blog by id and render in the blog-input.html
+    /**
+     * update a blog: get a blog by id and render in the blog-input.html
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/blogs/{id}/update")
     public String blogs(@PathVariable Long id, Model model){
         setTypeAndTag(model);
@@ -93,8 +108,14 @@ public class BlogController {
         return INPUT;
     }
 
-    // save the blog from blog-input.html
-    @PostMapping("/blogs")
+    /**
+     * save the blog from blog-input.html
+     * @param blog
+     * @param attributes
+     * @param request
+     * @return
+     */
+    @PostMapping("/blogs/input")
     public String post(Blog blog, RedirectAttributes attributes, HttpServletRequest request){
 
         String token = request.getHeader("Authorization");
@@ -122,7 +143,12 @@ public class BlogController {
         return REDIRECT_LIST;
     }
 
-    // delete a blog
+    /**
+     * delete a blog
+     * @param id
+     * @param attributes
+     * @return
+     */
     @GetMapping("/blogs/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes attributes){
         blogService.deleteBlog(id);
