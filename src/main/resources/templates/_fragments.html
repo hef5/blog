@@ -28,7 +28,7 @@
                 <a th:href="@{/about}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="icon info"></i>关于我</a>
                 <div class="item right m-mobile-hide">
                     <form name="search" action="#" th:action="@{/search}" method="POST" target="_blank">
-                        <div class="ui icon transparent inverted input">
+                        <div class="ui icon inverted input">
                             <input type="text" name="query" placeholder="search..." th:value="${query}">
                             <i onclick="document.forms['search'].submit()" class="icon link search"></i>
                         </div>

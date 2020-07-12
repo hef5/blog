@@ -189,7 +189,7 @@ table {
 
 /*--- layout ---*/
 #blog-container{
-    padding: 5px 25px;
+    padding: 5px 20px;
 }
 #tag-container{
     padding: 5px;
@@ -204,6 +204,9 @@ table {
 @media screen and (max-width: 768px){
     #toc-container{
         display: none;
+    }
+    #blog-container{
+        padding: 0px !important;
     }
 }
 

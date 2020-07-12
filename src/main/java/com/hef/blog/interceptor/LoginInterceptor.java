@@ -13,7 +13,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                              HttpServletResponse response,
                              Object handler) throws Exception {
 
-        // using Session
+
+        /**
+         * using Session
+         */
         /*if (request.getSession().getAttribute("user") == null){
             response.sendRedirect("/admin");
             return false;

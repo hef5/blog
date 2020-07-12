@@ -34,18 +34,23 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog getBlog(Long id) {
-        return blogRepository.getOne(id);
+        Optional<Blog> blog = blogRepository.findById(id);
+        if (blog.isEmpty()){
+            throw new NotFoundException("该博客不存在");
+        }
+        return blog.get();
     }
 
     @Transactional
     @Override
     public Blog getAndConvert(Long id) {
-        Blog blog = blogRepository.getOne(id);
-        if(blog == null){
+        Optional<Blog> blog = blogRepository.findById(id);
+        System.out.println(blog.isEmpty());
+        if(blog.isEmpty()){
             throw new NotFoundException("该博客不存在");
         }
         Blog b = new Blog();
-        BeanUtils.copyProperties(blog, b);
+        BeanUtils.copyProperties(blog.get(), b);
         String content = b.getContent();
         b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
         blogRepository.updateViews(id);
@@ -105,10 +110,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog updateBlog(Long id, Blog blog) {
-        Blog blog1 = blogRepository.getOne(id);
-        if (blog1 == null){
-            throw new NotFoundException("该博客不存在");
-        }
+        Blog blog1 = blogRepository.findById(id).get();
         BeanUtils.copyProperties(blog, blog1, MyBeanUtils.getNullPropertyNames(blog));
         blog1.setUpdateTime(new Date());
         return blogRepository.save(blog1);
@@ -142,5 +144,6 @@ public class BlogServiceImpl implements BlogService {
     public Long countBlog() {
         return blogRepository.count();
     }
+
 
 }
