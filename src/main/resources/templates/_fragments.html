@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,54 +9,48 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.2/dist/semantic.min.css">
     <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}" >
     <link rel="stylesheet" href="../static/css/blog.css" th:href="@{/css/blog.css}">
-
-<!--    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">-->
     <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
     <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
-
-
-
 </head>
+
+
 <body>
-    <!-- nav -->
-    <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini">
-        <div class="ui container">
-            <div class="ui inverted secondary stackable menu" style="margin-bottom: 0px;">
-                <h2 class="ui item header">大杂烩</h2>
-                <a th:href="@{/}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="icon home"></i>首页</a>
-                <a th:href="@{/types/-1}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="icon idea"></i>分类</a>
-                <a th:href="@{/tags/-1}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="icon tags"></i>标签</a>
-                <a th:href="@{/archives}"href="#" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="icon clone"></i>归档</a>
-                <a th:href="@{/about}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="icon info"></i>关于我</a>
-                <div class="item right m-mobile-hide">
-                    <form name="search" action="#" th:action="@{/search}" method="POST" target="_blank">
-                        <div class="ui icon inverted input">
-                            <input type="text" name="query" placeholder="search..." th:value="${query}">
-                            <i onclick="document.forms['search'].submit()" class="icon link search"></i>
-                        </div>
-                    </form>
-                </div>
+
+<!-- nav -->
+<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu" style="margin-bottom: 0px;">
+            <a th:href="@{/}"><h2 class="ui item header">HEFENG</h2></a>
+            <a th:href="@{/}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="icon home"></i>Home</a>
+            <a th:href="@{/tags/-1}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="icon tags"></i>Topics</a>
+            <a th:href="@{/about}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="icon info"></i>About Me</a>
+            <div class="item right m-mobile-hide">
+
             </div>
-            <a href="#" class="ui menu toggle black icon button m-top-right m-mobile-show">
-                <i class="sidebar icon"></i>
-            </a>
+            <div class="item right m-mobile-hide">
+                <a class="ui blue button">Log In</a>
+            </div>
         </div>
-    </nav>
+        <a href="#" class="ui menu toggle black icon button m-top-right m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </div>
+</nav>
 
-    <!-- footer -->
-    <footer th:fragment="footer" class="ui segment inverted vertical attached padded">
-        <div class="ui center aligned container">
-            <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright <i class="copyright outline icon"></i> 2020 hefeng.com. All Rights Reserved.
-            </p>
-        </div>
-    </footer>
+<!-- footer -->
+<footer th:fragment="footer" class="ui segment inverted vertical attached padded">
+    <div class="ui center aligned container">
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright <i class="copyright outline icon"></i> 2020 hefeng.com. All Rights Reserved.
+        </p>
+    </div>
+</footer>
 
-    <th:block th:fragment="script">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<th:block th:fragment="script">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
-        <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-    </th:block>
+    <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+</th:block>
 
 </body>
 </html>
