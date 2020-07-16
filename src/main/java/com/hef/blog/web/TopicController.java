@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @Controller
-public class IndexTagController {
+public class TopicController {
 
 
     private TagService tagService;
     private BlogService blogService;
 
     @Autowired
-    public IndexTagController(TagService tagService, BlogService blogService) {
+    public TopicController(TagService tagService, BlogService blogService) {
         this.tagService = tagService;
         this.blogService = blogService;
     }

@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.management.Query;
 
 @Controller
-public class IndexController {
+public class HomeController {
 
     private BlogService blogService;
     private TypeService typeService;
     private TagService tagService;
 
     @Autowired
-    public IndexController(BlogService blogService, TypeService typeService, TagService tagService) {
+    public HomeController(BlogService blogService, TypeService typeService, TagService tagService) {
         this.blogService = blogService;
         this.typeService = typeService;
         this.tagService = tagService;
