@@ -37,52 +37,24 @@
     <!-- context -->
     <div id="content-container" class="m-container-small m-padded-tb-big">
         <div class="ui container">
-            <div class="ui stackable grid">
-                <div class="eleven wide column">
-                    <div class="ui segment">
-                        <img src="https://picsum.photos/id/1/800/600" alt="#" class="ui rounded image">
-                    </div>
-                </div>
-                <div class="five wide column">
-                    <div class="ui top attached segment">
-                        <div class="ui header">关于我</div>
-                    </div>
-                    <div class="ui attached segment">
-                        <p class="m-text"></p>
-                        <p class="m-text"></p>
-                    </div>
-                    <div class="ui attached segment">
-                        <div class="ui teal basic left pointing label">思考</div>
-                        <div class="ui teal basic left pointing label">思考</div>
-                        <div class="ui teal basic left pointing label">思考</div>
-                        <div class="ui teal basic left pointing label m-margin-top">思考</div>
-                    </div>
-                    <div class="ui attached segment">
-                        <div class="ui teal basic left pointing label m-margin-tb-tiny">思考</div>
-                        <div class="ui teal basic left pointing label m-margin-tb-tiny">思考</div>
-                        <div class="ui teal basic left pointing label m-margin-tb-tiny">思考</div>
-                        <div class="ui teal basic left pointing label m-margin-tb-tiny">思考</div>
-                        <div class="ui teal basic left pointing label m-margin-tb-tiny">思考</div>
-                        <div class="ui teal basic left pointing label m-margin-tb-tiny">思考</div>
-                        <div class="ui teal basic left pointing label m-margin-tb-tiny">思考</div>
-                        <div class="ui teal basic left pointing label m-margin-tb-tiny">思考</div>
-                        <div class="ui teal basic left pointing label m-margin-tb-tiny">思考</div>
-                        <div class="ui teal basic left pointing label m-margin-tb-tiny">思考</div>
-                    </div>
-                    <div class="ui bottom attached segment">
-                        <a href="#" class="ui circular icon button"><i class="github icon"></i></a>
-                        <a href="#" class="wechat ui circular icon button"><i class="weixin icon"></i></a>
-                        <a href="#" class="ui circular icon button"><i class="qq icon"></i></a>
-                    </div>
 
-                    <div class="ui wechat-qr flowing popup transition hidden">
-                        <div class="image">
-                            <img src="./static/images/wechat.jpg" alt="" class="ui rounded images" style="width: 100px;">
-                        </div>
-                    </div>
-
-                </div>
+            <div class="ui attached segment content-bgc" id="about-me">
+                <h1 id="about-me">About Me</h1>
+                <img class="ui small right floated image" th:src="@{images/hefeng.jpg}" src="../static/images/hefeng.jpg">
+                <p>I graduated from Kassel University last year. while studying at the university, I have gained a lot of experience with python und matlb. I love programming and want to be a software developer. So far, I have developed three personal project, from which I have learned a lot technologies and gained plenty of experience. </p>
+                <h3 id="my-skills">My Skills</h3>
+                <p><strong>HTML, CSS, Javascript, ES6, JQuery, Ajax, Java, Spring Boot, Thymeleaf, JPA/Hibernate, MySQL, Docker, etc.</strong>
+                    <br>
+                    Other programming lauguages: Python, Matlab, C++(basic)</p>
+                <h3 id="my-publication">My publication</h3>
+                <p>H. Chen &amp; T. Gleim;
+                    <a href="https://link.springer.com/content/pdf/10.1007/s11831-020-09427-z.pdf">High Order Accurate Methods for the Numerical Analysis of a Levitation Device;</a>
+                    <em>Archives of Computational Methods in Engineering (2020)</em></p>
+                <h3 id="about-this-website">About this Website</h3>
+                <p>This website was developed on the basis of a Udemy course project. The main tech stack used in backend are <strong>Spring Boot</strong>, <strong>Thymeleaf</strong>, <strong>JPA</strong>, <strong>Mysql</strong>. In Frontend, the <strong>HTML</strong>, <strong>CSS</strong>, <strong>Semantic-UI</strong>, <strong>Javascript</strong>, <strong>jQuery</strong> and some libaries of <strong>Javascript</strong> were employed.</p>
+                <p>The admin system of this website was completely restructured. I use JWT token instead of session to make every request statless. Every time when the user login in successfully, token was stored in SessionStorage of the Browser. All the request in Admin system was made via Ajax becaus of request Header &quot;Authorization&quot; need to be added. Therefore, the Admin system of this blog website is more like a single page application and only a little thymeleaf are employed for convenience.</p>
             </div>
+
         </div>
     </div>
 

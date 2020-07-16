@@ -16,6 +16,12 @@ body{
     color: #eeeeee !important;
 }*/
 
+#about-me{
+    letter-spacing: 0.1mm !important;
+    word-spacing: 2px !important;
+    text-align: justify;
+}
+
 #content-container{
     min-height: 100% !important;
 }
@@ -188,5 +194,7 @@ body{
     }
 
 }
+
+
 
 
