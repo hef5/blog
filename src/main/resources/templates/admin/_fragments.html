@@ -15,10 +15,10 @@
     <nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini">
         <div class="ui container">
             <div id="nav-menu" class="ui inverted secondary stackable menu" style="margin-bottom: 0px">
-                <h2 class="ui item teal header">后台管理</h2>
-                <a id="blogs" onclick="blogList()" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="icon home"></i>博客</a>
-                <a id="types" onclick="typeList()" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="icon idea"></i>分类</a>
-                <a id="tags" onclick="tagList()" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="icon tags"></i>标签</a>
+                <h2 class="ui item teal header">Management</h2>
+                <a id="blogs" onclick="blogList()" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="icon home"></i>Blog</a>
+                <a id="types" onclick="typeList()" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="icon idea"></i>Type</a>
+                <a id="tags" onclick="tagList()" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="icon tags"></i>Topic</a>
                 <div class="right m-item menu m-mobile-hide">
                     <div class="ui dropdown item">
                         <div class="text">
@@ -27,7 +27,7 @@
                         </div>
                         <i class="dropdown icon"></i>
                         <div class="menu">
-                            <a id="logout" th:href="@{/admin/logout}" class="item">注销</a>
+                            <a id="logout" th:href="@{/admin/logout}" class="item">Log out</a>
                         </div>
                     </div>
                 </div>

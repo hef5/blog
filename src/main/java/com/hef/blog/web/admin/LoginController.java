@@ -57,7 +57,7 @@ public class LoginController {
 
             return LOGIN_SUCCESS;
         } else {
-            attributes.addFlashAttribute("message", "用户名和密码错误");
+            attributes.addFlashAttribute("message", "Username or Password is not correct");
             return REDIRECT_ADMIN;
         }
     }

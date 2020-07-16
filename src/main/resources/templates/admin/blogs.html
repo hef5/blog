@@ -6,14 +6,14 @@
             <input id="pageNumber" type="hidden">
             <div class="inline fields">
                 <div class="field">
-                    <input name="title" placeholder="标题" type="text" th:field="*{title}">
+                    <input name="title" placeholder="Title" type="text" th:field="*{title}">
                 </div>
                 <div class="field">
                     <div class="ui labeled action input">
                         <div class="ui selection dropdown">
                             <input name="typeId" type="hidden" th:field="*{typeId}">
                             <i class="dropdown icon"></i>
-                            <div class="default text">分类</div>
+                            <div class="default text">Type</div>
                             <div class="menu">
                                 <div class="item" data-value="1" th:data-value="${type.id}"
                                      th:each="type : ${types}"
@@ -30,11 +30,11 @@
                 <div class="field">
                     <div class="ui checkbox">
                         <input id="recommend" name="recommend" type="checkbox" th:field="*{recommend}">
-                        <label for="recommend">推荐</label>
+                        <label for="recommend">Publish</label>
                     </div>
                 </div>
                 <div class="field">
-                    <button onclick="searchBlog()" class="ui mini teal basic button" id="search-btn" type="button"><i class="search icon"></i>搜索
+                    <button onclick="searchBlog()" class="ui mini blue button" id="search-btn" type="button"><i class="search icon"></i>Search
                     </button>
                 </div>
             </div>
@@ -62,8 +62,8 @@
                     <td th:text="${blog.published} ? '发布':'草稿'">发布</td>
                     <td th:text="${blog.updateTime}">2020年5月14日 22点56分</td>
                     <td>
-                        <a class="ui mini teal button m-margin-right" th:onclick="|editBlog(${blog.id})|">编辑</a>
-                        <a class="ui mini teal button" th:onclick="|confirmDelete(${blog.id})|">删除</a>
+                        <a class="ui mini blue button m-margin-right" th:onclick="|editBlog(${blog.id})|">Edit</a>
+                        <a class="ui mini blue button" th:onclick="|confirmDelete(${blog.id})|">Delete</a>
                     </td>
                 </tr>
                 </tbody>
@@ -72,11 +72,11 @@
                     <th colspan="7">
                         <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
                             <a class="icon item"
-                               th:onclick="|otherPage(${page.number}-1)|" th:unless="${page.first}">上一页</a>
+                               th:onclick="|otherPage(${page.number}-1)|" th:unless="${page.first}">Previous</a>
                             <a class="icon item"
-                               th:onclick="|otherPage(${page.number}+1)|" th:unless="${page.last}">下一页</a>
+                               th:onclick="|otherPage(${page.number}+1)|" th:unless="${page.last}">Next</a>
                         </div>
-                        <a class="ui mini right floated teal basic button" onclick="addBlog()">新增</a>
+                        <a class="ui mini right floated teal basic button" onclick="addBlog()">Add New</a>
                     </th>
                 </tr>
                 </tfoot>
@@ -84,8 +84,8 @@
 
             <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
                 <i class="close icon"></i>
-                <div class="header">提示:</div>
-                <p th:text="${message}">恭喜，操作成功！</p>
+                <div class="header">Tip:</div>
+                <p th:text="${message}">Congratulations，Congratulations, the operation is successful！</p>
             </div>
 
 
