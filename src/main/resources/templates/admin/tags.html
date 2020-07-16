@@ -13,17 +13,17 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>标签名称</th>
-                            <th>操作</th>
+                            <th>Topics</th>
+                            <th>Operation</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="tag, iterStat : ${page.content}">
                             <td th:text="${iterStat.count}">1</td>
-                            <td th:text="${tag.name}">刻意练习清单</td>
+                            <td th:text="${tag.name}">javascript</td>
                             <td>
-                                <a th:onclick="|editTags(${tag.id})|" class="ui mini teal button">编辑</a>
-                                <a th:onclick="|deleteTags(${tag.id})|" class="ui mini teal button">删除</a>
+                                <a th:onclick="|editTags(${tag.id})|" class="ui mini blue button">Edit</a>
+                                <a th:onclick="|deleteTags(${tag.id})|" class="ui mini blue button">Delete</a>
                             </td>
                         </tr>
                     </tbody>
@@ -31,10 +31,10 @@
                         <tr>
                             <th colspan="6">
                                 <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
-                                    <a th:onclick="|previousTagPage(${page.number})|" class="icon item" th:unless="${page.first}">上一页</a>
-                                    <a th:onclick="|nextTagPage(${page.number})|" class="icon item" th:unless="${page.last}">下一页</a>
+                                    <a th:onclick="|previousTagPage(${page.number})|" class="icon item" th:unless="${page.first}">Previous</a>
+                                    <a th:onclick="|nextTagPage(${page.number})|" class="icon item" th:unless="${page.last}">Next</a>
                                 </div>
-                                <a onclick="addTags()" class="ui mini right floated teal basic button">新增</a>
+                                <a onclick="addTags()" class="ui mini right floated blue button">New Topic</a>
                             </th>
                         </tr>
                     </tfoot>
@@ -43,4 +43,3 @@
         </div>
     </div>
  
-

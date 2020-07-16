@@ -32,9 +32,7 @@ public class HomeController {
     public String index(@PageableDefault(size=10, sort ={"updateTime"}, direction = Sort.Direction.DESC)
                                     Pageable pageable, Model model){
         model.addAttribute("page", blogService.listBlog(pageable));
-        model.addAttribute("types", typeService.listTypeTop(6));
         model.addAttribute("tags", tagService.listTagTop(10));
-        model.addAttribute("recommendBlogs", blogService.listRecommendBlogTop(8));
         System.out.println("----- index -----");
         return "index";
     }

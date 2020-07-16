@@ -6,8 +6,8 @@
             <div class="field">
 
                 <div class="ui left labeled input">
-                    <label class="ui teal basic label">名称</label>
-                    <input type="text" name="name" placeholder="分类名称" th:field="*{name}">
+                    <label class="ui teal basic label">Type</label>
+                    <input type="text" name="name" placeholder="Name" th:field="*{name}">
                 </div>
             </div>
             <div class="ui error message"></div>
@@ -21,9 +21,9 @@
 
             <div class="ui right aligned container">
                 <button type="button" class="ui button" onclick="window.history.go(-1)">
-                    返回
+                    Return
                 </button>
-                <button onclick="postTag()" class="ui teal submit button">提交</button>
+                <button onclick="postTag()" class="ui blue submit button">Save</button>
             </div>
 
 

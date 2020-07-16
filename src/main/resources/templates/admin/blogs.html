@@ -29,8 +29,8 @@
                 </div>
                 <div class="field">
                     <div class="ui checkbox">
-                        <input id="recommend" name="recommend" type="checkbox" th:field="*{recommend}">
-                        <label for="recommend">Publish</label>
+                        <input id="published" name="published" type="checkbox" th:field="*{published}">
+                        <label for="published">Publish</label>
                     </div>
                 </div>
                 <div class="field">
@@ -45,21 +45,19 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th>标题</th>
-                    <th>类型</th>
-                    <th>推荐</th>
-                    <th>状态</th>
-                    <th>更新时间</th>
-                    <th>操作</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Publish</th>
+                    <th>Update Time</th>
+                    <th>Operation</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="blog, iterStat : ${page.content}">
                     <td th:text="${iterStat.count}">1</td>
-                    <td th:text="${blog.title}">刻意练习清单</td>
-                    <td th:text="${blog.type.name}">认知清单</td>
-                    <td th:text="${blog.recommend} ? '是':'否'">是</td>
-                    <td th:text="${blog.published} ? '发布':'草稿'">发布</td>
+                    <td th:text="${blog.title}">spring-boot</td>
+                    <td th:text="${blog.type.name}">java</td>
+                    <td th:text="${blog.published} ? 'Published':'Saved'">publshed</td>
                     <td th:text="${blog.updateTime}">2020年5月14日 22点56分</td>
                     <td>
                         <a class="ui mini blue button m-margin-right" th:onclick="|editBlog(${blog.id})|">Edit</a>
@@ -76,7 +74,7 @@
                             <a class="icon item"
                                th:onclick="|otherPage(${page.number}+1)|" th:unless="${page.last}">Next</a>
                         </div>
-                        <a class="ui mini right floated teal basic button" onclick="addBlog()">Add New</a>
+                        <a class="ui mini right floated blue button" onclick="addBlog()">New Blog</a>
                     </th>
                 </tr>
                 </tfoot>

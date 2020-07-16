@@ -3,6 +3,7 @@ package com.hef.blog.web.admin;
 import com.hef.blog.entity.Tag;
 import com.hef.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -28,9 +29,9 @@ public class TagController {
         this.tagService = tagService;
     }
 
-    @GetMapping("/tags")
-    public String list(@PageableDefault(size=20, sort=("id"), direction = Sort.Direction.DESC)
-                                   Pageable pageable, Model model){
+    @GetMapping("/tags/{pageNumber}")
+    public String list(@PathVariable int pageNumber, Model model){
+        Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("id").descending());
         model.addAttribute("page", tagService.listTag(pageable));
         return "admin/tags";
     }
@@ -66,7 +67,7 @@ public class TagController {
         } else {
             attributes.addFlashAttribute("message", "操作成功！");
         }
-        return "redirect:/admin/tags";
+        return "redirect:/admin/tags/0";
     }
 
     @PostMapping("/tags/{id}")

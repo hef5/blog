@@ -80,8 +80,8 @@ public class BlogServiceImpl implements BlogService {
             if (blog.getTypeId() != null) {
                 predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
             }
-            if (blog.isRecommend()) {
-                predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
+            if (blog.isPublished()) {
+                predicates.add(cb.equal(root.<Boolean>get("published"), blog.isPublished()));
             }
             return cb.and(predicates.toArray(new Predicate[predicates.size()]));
         };
@@ -89,12 +89,6 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findAll(spec, pageable);
     }
 
-    @Override
-    public List<Blog> listRecommendBlogTop(Integer size) {
-        Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
-        Pageable pageable = PageRequest.of(0, size, sort);
-        return blogRepository.findTop(pageable);
-    }
 
     @Override
     public Blog saveBlog(Blog blog) {

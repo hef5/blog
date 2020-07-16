@@ -3,6 +3,7 @@ package com.hef.blog.web.admin;
 import com.hef.blog.entity.Type;
 import com.hef.blog.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -28,9 +29,9 @@ public class TypeController {
         this.typeService = typeService;
     }
 
-    @GetMapping("/types")
-    public String list(@PageableDefault(size=5, sort=("id"), direction = Sort.Direction.DESC)
-                                   Pageable pageable, Model model){
+    @GetMapping("/types/{pageNumber}")
+    public String list(@PathVariable int pageNumber, Model model){
+        Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("id").descending());
         model.addAttribute("page", typeService.listType(pageable));
         return "admin/types";
     }
@@ -64,7 +65,7 @@ public class TypeController {
         } else {
             attributes.addFlashAttribute("message", "操作成功！");
         }
-        return "redirect:/admin/types";
+        return "redirect:/admin/types/0";
     }
 
     @PostMapping("/types/{id}")

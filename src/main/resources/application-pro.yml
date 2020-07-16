@@ -1,18 +1,18 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?useSSL=false&serverTimezone=UTC
-    username: hbstudent
-    password: hbstudent
+    url: jdbc:mysql://localhost:3306/blog_product?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: hefeng
+    password: hefeng
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     show-sql: true
 
 logging:
   level:
-    root: warn
-    com.hef.blog: info
+    root: info #warn
+    com.hef.blog: debug #info
   file: log/blog-pro.log
 server:
   port: 8081

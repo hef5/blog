@@ -11,17 +11,17 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th>分类名称</th>
-                    <th>操作</th>
+                    <th>Types</th>
+                    <th>Operation</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="type, iterStat : ${page.content}">
                     <td th:text="${iterStat.count}">1</td>
-                    <td th:text="${type.name}">刻意练习清单</td>
+                    <td th:text="${type.name}">computer science</td>
                     <td>
-                        <a class="ui mini teal button" th:onclick="|editType(${type.id})|">编辑</a>
-                        <a class="ui mini teal button" th:onclick="|deleteType(${type.id})|">删除</a>
+                        <a class="ui mini blue button" th:onclick="|editType(${type.id})|">Edit</a>
+                        <a class="ui mini blue button" th:onclick="|deleteType(${type.id})|">Delete</a>
                     </td>
                 </tr>
                 </tbody>
@@ -30,12 +30,12 @@
                     <th colspan="6">
                         <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
                             <a class="icon item" th:onclick="|previousTypePage(${page.number})|"
-                               th:unless="${page.first}">上一页</a>
+                               th:unless="${page.first}">Previous</a>
                             <a class="icon item" th:onclick="|nextTypePage(${page.number})|"
-                               th:unless="${page.last}">下一页</a>
+                               th:unless="${page.last}">Next</a>
                         </div>
-                        <a class="ui mini right floated teal basic button" onclick="addType()">
-                            新增</a>
+                        <a class="ui mini right floated blue button" onclick="addType()">
+                            New Type</a>
                     </th>
                 </tr>
                 </tfoot>

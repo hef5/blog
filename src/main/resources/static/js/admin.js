@@ -1,6 +1,6 @@
 const URL_BLOG = "/admin/blogs/0";
-const URL_TYPE = "/admin/types";
-const URL_TAG = "/admin/tags";
+const URL_TYPE = "/admin/types/0";
+const URL_TAG = "/admin/tags/0";
 const URL_LOGOUT = "/admin/logout";
 const URL_BLOG_INPUT = "/admin/blogs/input";
 const URL_BLOG_SEARCH = "/admin/blogs/search/0";
@@ -77,7 +77,7 @@ function searchBlog() {
     let data = {
         title: $("[name='title']").val(),
         typeId: $("[name='typeId']").val(),
-        recommend: $("[name='recommend']").prop('checked'),
+        recommend: $("[name='published']").prop('checked'),
         page: "0"
     }
     ajaxPost(URL_BLOG_SEARCH, data);
@@ -95,10 +95,10 @@ function otherPage(pageNumber) {
     let data = {
         title: $("[name='title']").val(),
         typeId: $("[name='typeId']").val(),
-        recommend: $("[name='recommend']").prop('checked'),
+        published: $("[name='published']").prop('checked'),
         page: pageNumber
     };
-    if (data.title == "" && data.typeId == "" && data.recommend == false) {
+    if (data.title == "" && data.typeId == "" && data.published == false) {
         url = "/admin/blogs/" + pageNumber;
         ajaxGet(url);
         history.pushState(new StateGet(url, data), null, url);
@@ -124,7 +124,7 @@ function saveBlog() {
         type: $("[name='type.id']").val(),
         tagIds: $("[name='tagIds']").val(),
         firstPicture: $("[name='firstPicture']").val(),
-        recommend: $("[name='recommend']").prop('checked'),
+        published: $("[name='published']").prop('checked'),
         shareStatement: $("[name='shareStatement']").prop('checked'),
         appreciation: $("[name='appreciation']").prop('checked'),
         commentAllowed: $("[name='commentAllowed']").prop('checked')
@@ -146,7 +146,7 @@ function publishBlog() {
         type: $("[name='type.id']").val(),
         tagIds: $("[name='tagIds']").val(),
         firstPicture: $("[name='firstPicture']").val(),
-        recommend: $("[name='recommend']").prop('checked'),
+        published: $("[name='published']").prop('checked'),
         shareStatement: $("[name='shareStatement']").prop('checked'),
         appreciation: $("[name='appreciation']").prop('checked'),
         commentAllowed: $("[name='commentAllowed']").prop('checked')

@@ -4,14 +4,14 @@ public class BlogQuery {
 
     private String title;
     private Long typeId;
-    private boolean recommend;
+    private boolean published;
 
-    public boolean isRecommend() {
-        return recommend;
+    public boolean isPublished() {
+        return published;
     }
 
-    public void setRecommend(boolean recommend) {
-        this.recommend = recommend;
+    public void setPublished(boolean published) {
+        this.published = published;
     }
 
     public String getTitle() {
@@ -29,6 +29,7 @@ public class BlogQuery {
     public void setTypeId(Long typeId) {
         this.typeId = typeId;
     }
+
 
 
 }

@@ -8,14 +8,14 @@
                 <div class="required field">
                     <div class="ui left labeled input">
                         <label class="ui teal basic label">Title</label>
-                        <input type="text" name="title" placeholder="标题" th:field="*{title}">
+                        <input type="text" name="title" placeholder="title" th:field="*{title}">
                     </div>
                 </div>
 
                 <!-- 内容 -->
                 <div class="required field">
                     <div id="md-content" style="z-index: 1 !important;">
-                        <textarea name="content" placeholder="内容" style="display: none;" th:text="*{content}">
+                        <textarea name="content" placeholder="content" style="display: none;" th:text="*{content}">
                         </textarea>
                     </div>
                 </div>
@@ -40,10 +40,10 @@
                                 <div class="menu">
                                     <div th:each="type : ${types}" class="item" data-value="1"
                                          th:data-value="${type.id}"
-                                         th:text="${type.name}">错误日志</div>
+                                         th:text="${type.name}">math</div>
                                     <!--/*-->
-                                    <div class="item" data-value="1">错误日志</div>
-                                    <div class="item" data-value="2">开发者手册</div>
+                                    <div class="item" data-value="1">physics</div>
+                                    <div class="item" data-value="2">mathematics</div>
                                     <!--*/-->
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                 <div class="menu">
                                     <div th:each="tag : ${tags}" class="item" data-value="1"
                                          th:data-value="${tag.id}"
-                                         th:text="${tag.name}">错误日志</div>
+                                         th:text="${tag.name}">java</div>
                                     <!--/*-->
                                     <div class="item" data-value="1">Java</div>
                                     <div class="item" data-value="2">Javascript</div>
@@ -74,21 +74,18 @@
                 <div class="required field">
                     <div class="ui left labeled input">
                         <label class="ui teal basic label">Picture</label>
-                        <input type="text" name="firstPicture" placeholder="首图引用地址" th:field="*{firstPicture}">
+                        <input type="text" name="firstPicture" placeholder="Picture URL" th:field="*{firstPicture}">
                     </div>
                 </div>
 
 
-
-                </div>
-
                 <!-- 错误信息 -->
                 <div class="ui error message"></div>
 
-                <div class="ui right aligned container">                   
-                    <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
-                    <button onclick="saveBlog()" id="save-btn" class="ui secondary button">保存</button>
-                    <button onclick="publishBlog()" id="publish-btn" class="ui teal button">发布</button>
+                <div class="ui right aligned container">
+                    <button type="button" class="ui button" onclick="window.history.go(-1)">Return</button>
+                    <button onclick="saveBlog()" id="save-btn" class="ui secondary button">Save</button>
+                    <button onclick="publishBlog()" id="publish-btn" class="ui primary button">Publish</button>
                 </div>
 
             </div>

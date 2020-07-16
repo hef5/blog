@@ -3,7 +3,7 @@ spring:
     mode: HTML
 
   profiles:
-    active: dev
+    active: pro
 
 comment.avatar: https://picsum.photos/100
 

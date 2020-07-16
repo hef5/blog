@@ -20,8 +20,6 @@ public interface BlogService {
 
     Page<Blog> listBlog(String query, Pageable pageable);
 
-    List<Blog> listRecommendBlogTop(Integer size);
-
     Blog saveBlog(Blog blog);
 
     Blog updateBlog(Long id, Blog blog);

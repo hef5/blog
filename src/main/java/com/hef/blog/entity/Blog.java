@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "t_blog")
 public class Blog {
 
     @Id
@@ -18,14 +17,10 @@ public class Blog {
     @Lob
     private String content;
     private String firstPicture;
-    private String flag;
     private Integer views;
     private String description;
-    private boolean appreciation;
-    private boolean shareStatement;
     private boolean commentAllowed;
     private boolean published;
-    private boolean recommend;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
@@ -77,36 +72,12 @@ public class Blog {
         this.firstPicture = firstPicture;
     }
 
-    public String getFlag() {
-        return flag;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
-    }
-
     public Integer getViews() {
         return views;
     }
 
     public void setViews(Integer views) {
         this.views = views;
-    }
-
-    public boolean isAppreciation() {
-        return appreciation;
-    }
-
-    public void setAppreciation(boolean appreciation) {
-        this.appreciation = appreciation;
-    }
-
-    public boolean isShareStatement() {
-        return shareStatement;
-    }
-
-    public void setShareStatement(boolean shareStatement) {
-        this.shareStatement = shareStatement;
     }
 
     public boolean isCommentAllowed() {
@@ -123,14 +94,6 @@ public class Blog {
 
     public void setPublished(boolean published) {
         this.published = published;
-    }
-
-    public boolean isRecommend() {
-        return recommend;
-    }
-
-    public void setRecommend(boolean recommend) {
-        this.recommend = recommend;
     }
 
     public Date getCreateTime() {
@@ -227,13 +190,9 @@ public class Blog {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", firstPicture='" + firstPicture + '\'' +
-                ", flag='" + flag + '\'' +
                 ", views=" + views +
-                ", appreciation=" + appreciation +
-                ", shareStatement=" + shareStatement +
                 ", commentAllowed=" + commentAllowed +
                 ", published=" + published +
-                ", recommend=" + recommend +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';
