@@ -27,18 +27,27 @@ public class TopicController {
         this.blogService = blogService;
     }
 
-    @GetMapping("/tags/{id}")
+    @GetMapping("/topics")
+    public String tags(@PageableDefault(size = 5, sort = {"updateTime"},
+            direction = Sort.Direction.DESC) Pageable pageable, Model model){
+
+        List<Tag> tags = tagService.listTagTop(1000);
+        model.addAttribute("tags", tags);
+        model.addAttribute("page", blogService.listBlog(pageable));
+        model.addAttribute("activeTagId", -1L);
+        return "topics";
+    }
+
+    @GetMapping("/topics/{id}")
     public String tags(@PageableDefault(size = 5, sort = {"updateTime"},
             direction = Sort.Direction.DESC) Pageable pageable,
                        @PathVariable Long id, Model model){
-        List<Tag> tags = tagService.listTagTop(10000);
-        if (id == -1) {
-            id = tags.get(0).getId();
-        }
+        List<Tag> tags = tagService.listTagTop(1000);
+
         model.addAttribute("tags", tags);
         model.addAttribute("page", blogService.listBlog(id,pageable));
         model.addAttribute("activeTagId", id);
-        return "tags";
+        return "topics";
     }
 
 }

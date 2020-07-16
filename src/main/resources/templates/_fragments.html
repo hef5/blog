@@ -22,13 +22,13 @@
         <div class="ui inverted secondary stackable menu" style="margin-bottom: 0px;">
             <a th:href="@{/}"><h2 class="ui item header">HEFENG</h2></a>
             <a th:href="@{/}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="icon home"></i>Home</a>
-            <a th:href="@{/tags/-1}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="icon tags"></i>Topics</a>
+            <a th:href="@{/topics}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="icon tags"></i>Topics</a>
             <a th:href="@{/about}" href="#" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="icon info"></i>About Me</a>
             <div class="item right m-mobile-hide">
 
             </div>
             <div class="item right m-mobile-hide">
-                <a class="ui blue button">Log In</a>
+                <a class="ui blue button" style="padding: 6px 13px"><h4 style="word-spacing: 5px">Log In</h4></a>
             </div>
         </div>
         <a href="#" class="ui menu toggle black icon button m-top-right m-mobile-show">

@@ -41,21 +41,23 @@
             <div class="ui attached segment header-bgc">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <h3 class="ui header">标签</h3>
+                        <h3 class="ui header">Topics</h3>
                     </div>
                     <div class="right aligned column">
-                        共 <h2 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(tags)}">14</h2> 个
+                        Total: <h2 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(tags)}">14</h2>
                     </div>
                 </div>
             </div>
 
+            <!-- topics -->
             <div class="ui attached segment m-padded-tb-large content-bgc">
-                <a href="#" th:each="tag : ${tags}" th:href="@{/tags/{id}(id=${tag.id})}" th:classappend="${tag.id==activeTagId} ? 'grey'" class="ui label m-margin-tb-tiny">
+                <a href="#" th:each="tag : ${tags}" th:href="@{/topics/{id}(id=${tag.id})}" th:classappend="${tag.id==activeTagId} ? 'violet'" class="ui blue label m-margin-tb-tiny">
                     <span th:text="${tag.name}">数学</span>
                     <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
                 </a>
             </div>
 
+            <!-- blogs -->
             <div class="ui attached segment content-bgc">
                 <div th:each="blog : ${page.content}" class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
                     <div class="ui mobile reversed stackable grid">
@@ -71,7 +73,7 @@
                             </p>
                             <div class="ui stackable grid">
                                 <div class="row">
-                                    <div class="eleven wide column">
+                                    <div class="column">
                                         <div class="ui mini horizontal link list">
                                             <div class="item">
                                                 <img src="../static/images/home.jpg" th:src="@{${blog.user.avatar}}" alt="#" class="ui avatar image">
@@ -84,18 +86,15 @@
                                                 </span>
                                             </div>
                                             <div class="item middle aligned">
-                                                <i class="eye icon"></i>
+                                                <i class="eye icon" style="vertical-align: top;"></i>
                                                 <span th:text="${blog.views}">2342</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="five wide column middle aligned">
-                                        <a href="#" th:text="${blog.type.name}" class="ui label m-padded-tiny m-text-thin">认知升级</a>
-                                    </div>
                                 </div>
-                                <div class="row">
+                                <div class="row" style="padding-top: 0px">
                                     <div class="column">
-                                        <a href="#" th:href="@{/tags/{id}(id=${tag.id})}" th:classappend="${tag.id==activeTagId} ? 'violet'" th:each="tag : ${blog.tags}" th:text="${tag.name}" class="ui blue label m-padded-mini m-text-thin">方法论</a>
+                                        <a href="#" th:href="@{/topics/{id}(id=${tag.id})}" th:classappend="${tag.id==activeTagId} ? 'violet'" th:each="tag : ${blog.tags}" th:text="${tag.name}" class="ui blue label m-padded-mini m-text-thin">方法论</a>
                                     </div>
                                 </div>
                             </div>
@@ -151,10 +150,10 @@
             <div class="ui attached segment content-bgc" th:if="${page.totalPages}>1">
                 <div class="ui middle aligned two column grid">
                     <div class="column">
-                        <a href="#" th:href="@{'/tags/'+${activeTagId}+ '?page=' +${page.number-1}}" th:unless="${page.first}" class="ui button m-button">上一页</a>
+                        <a href="#" th:href="@{'/topics/'+${activeTagId}+ '?page=' +${page.number-1}}" th:unless="${page.first}" class="ui button m-button">上一页</a>
                     </div>
                     <div class="right aligned column">
-                        <a href="#" th:href="@{'/tags/'+${activeTagId}+ '?page=' +${page.number+1}}" th:unless="${page.last}" class="ui button m-button">下一页</a>
+                        <a href="#" th:href="@{'/topics/'+${activeTagId}+ '?page=' +${page.number+1}}" th:unless="${page.last}" class="ui button m-button">下一页</a>
                     </div>
                 </div>
             </div>
