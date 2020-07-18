@@ -28,13 +28,13 @@ public class HomeController {
         this.tagService = tagService;
     }
 
-    @GetMapping("/")
+    @GetMapping({"/",""})
     public String index(@PageableDefault(size=10, sort ={"updateTime"}, direction = Sort.Direction.DESC)
                                     Pageable pageable, Model model){
         model.addAttribute("page", blogService.listBlog(pageable));
         model.addAttribute("tags", tagService.listTagTop(10));
         System.out.println("----- index -----");
-        return "index";
+        return "home";
     }
 
     @PostMapping("/search")

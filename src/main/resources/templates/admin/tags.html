@@ -31,8 +31,8 @@
                         <tr>
                             <th colspan="6">
                                 <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
-                                    <a th:onclick="|previousTagPage(${page.number})|" class="icon item" th:unless="${page.first}">Previous</a>
-                                    <a th:onclick="|nextTagPage(${page.number})|" class="icon item" th:unless="${page.last}">Next</a>
+                                    <a th:onclick="|otherTagPage(${page.number}-1)|" class="icon item" th:unless="${page.first}">Previous</a>
+                                    <a th:onclick="|otherTagPage(${page.number}+1)|" class="icon item" th:unless="${page.last}">Next</a>
                                 </div>
                                 <a onclick="addTags()" class="ui mini right floated blue button">New Topic</a>
                             </th>

@@ -124,9 +124,7 @@ function saveBlog() {
         type: $("[name='type.id']").val(),
         tagIds: $("[name='tagIds']").val(),
         firstPicture: $("[name='firstPicture']").val(),
-        published: $("[name='published']").prop('checked'),
-        shareStatement: $("[name='shareStatement']").prop('checked'),
-        appreciation: $("[name='appreciation']").prop('checked'),
+        published: $("[name='published']").val(false),
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
 
@@ -146,9 +144,7 @@ function publishBlog() {
         type: $("[name='type.id']").val(),
         tagIds: $("[name='tagIds']").val(),
         firstPicture: $("[name='firstPicture']").val(),
-        published: $("[name='published']").prop('checked'),
-        shareStatement: $("[name='shareStatement']").prop('checked'),
-        appreciation: $("[name='appreciation']").prop('checked'),
+        published: $("[name='published']").val(true),
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
 
@@ -175,14 +171,8 @@ function addTags() {
     history.pushState(new StateGet(url), null, url);
 }
 
-function previousTagPage(pageNumber) {
-    let url = "/admin/tags/" + pageNumber - 1;
-    ajaxGet(url);
-    history.pushState(new StateGet(url), null, url);
-}
-
-function nextTagPage(pageNumber) {
-    let url = "/admin/tags/" + pageNumber + 1;
+function otherTagPage(pageNumber) {
+    let url = "/admin/tags/" + pageNumber;
     ajaxGet(url);
     history.pushState(new StateGet(url), null, url);
 }
@@ -206,14 +196,8 @@ function postTag() {
 
 /** ------------------- types ------------------------ */
 
-function previousTypePage(pageNumber) {
-    let url = "/admin/types/" + pageNumber - 1;
-    ajaxGet(url);
-    history.pushState(new StateGet(url), null, url);
-}
-
-function nextTypePage(pageNumber) {
-    let url = "/admin/types/" + pageNumber + 1;
+function otherTypePage(pageNumber) {
+    let url = "/admin/types/" + pageNumber;
     ajaxGet(url);
     history.pushState(new StateGet(url), null, url);
 }

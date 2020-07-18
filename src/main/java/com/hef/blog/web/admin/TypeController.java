@@ -22,6 +22,8 @@ import javax.validation.Valid;
 @RequestMapping("/admin")
 public class TypeController {
 
+    private final static String REDIRECT_TYPE = "redirect:/admin/types/0";
+
     private TypeService typeService;
 
     @Autowired
@@ -65,7 +67,7 @@ public class TypeController {
         } else {
             attributes.addFlashAttribute("message", "操作成功！");
         }
-        return "redirect:/admin/types/0";
+        return REDIRECT_TYPE;
     }
 
     @PostMapping("/types/{id}")
@@ -85,14 +87,14 @@ public class TypeController {
         } else {
             attributes.addFlashAttribute("message", "更新成功！");
         }
-        return "redirect:/admin/types";
+        return REDIRECT_TYPE;
     }
 
     @GetMapping("/types/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes attributes){
         typeService.deleteType(id);
         attributes.addFlashAttribute("message", "删除成功");
-        return "redirect:/admin/types";
+        return REDIRECT_TYPE;
     }
 
 

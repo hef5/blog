@@ -122,7 +122,10 @@ public class BlogController {
 
         blog.setUser(user);
 
-        blog.setType(typeService.getType(blog.getType().getId()));
+        if(blog.getType() != null){
+            blog.setType(typeService.getType(blog.getType().getId()));
+        }
+
         System.out.println(blog.getTagIds());
         blog.setTags(tagService.listTag(blog.getTagIds()));
 

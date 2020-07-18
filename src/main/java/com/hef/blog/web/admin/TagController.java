@@ -50,6 +50,14 @@ public class TagController {
         return "admin/tag-input";
     }
 
+
+    /**
+     * create a new tag
+     * @param tag
+     * @param result
+     * @param attributes
+     * @return
+     */
     @PostMapping("/tags")
     public String post(@Valid Tag tag, BindingResult result, RedirectAttributes attributes){
         Tag tag1 = tagService.getTagByName(tag.getName());
@@ -91,14 +99,14 @@ public class TagController {
         } else {
             attributes.addFlashAttribute("message", "更新成功！");
         }
-        return "redirect:/admin/tags";
+        return "redirect:/admin/tags/0";
     }
 
     @GetMapping("/tags/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes attributes){
         tagService.deleteTag(id);
         attributes.addFlashAttribute("message", "删除成功");
-        return "redirect:/admin/tags";
+        return "redirect:/admin/tags/0";
     }
 
 
