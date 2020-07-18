@@ -38,7 +38,7 @@ function tagList(){
 
 function typeList() {
     ajaxGet(URL_TYPE)
-    history.pushState(new StateGet(URL_TYPE), URL_TYPE);
+    history.pushState(new StateGet(URL_TYPE), null, URL_TYPE);
 }
 
 $(document).on('click', '#logout',
@@ -117,14 +117,12 @@ function saveBlog() {
     let dataPostBlog = {
         published: false,
         id: $("[name='id']").val(),
-        flag: $("[name='flag']").val(),
         title: $("[name='title']").val(),
         content: $("[name='content']").val(),
         description: $("[name='description']").val(),
         type: $("[name='type.id']").val(),
         tagIds: $("[name='tagIds']").val(),
         firstPicture: $("[name='firstPicture']").val(),
-        published: $("[name='published']").val(false),
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
 
@@ -137,14 +135,12 @@ function publishBlog() {
     let dataPostBlog = {
         published: true,
         id: $("[name='id']").val(),
-        flag: $("[name='flag']").val(),
         title: $("[name='title']").val(),
         content: $("[name='content']").val(),
         description: $("[name='description']").val(),
         type: $("[name='type.id']").val(),
         tagIds: $("[name='tagIds']").val(),
         firstPicture: $("[name='firstPicture']").val(),
-        published: $("[name='published']").val(true),
         commentAllowed: $("[name='commentAllowed']").prop('checked')
     };
 

@@ -75,9 +75,9 @@
 
             <!-- 内容(正文)-->
             <div id="text-content" class="ui basic segment">
-                <div class="ui right aligned basic segment">
+                <!--<div class="ui right aligned basic segment">
                     <div class="ui orange basic label" th:text="${blog.flag}">原创</div>
-                </div>
+                </div>-->
                 <h1 class="ui header" id="content-title" th:text="${blog.title}">奥地利旅游业亟待复苏</h1>
                 <br>
                 <div class="typo typo-selection js-toc-content m-padded-lr-responsive m-padded-tb-large" id="content"
@@ -149,47 +149,11 @@
                 </div>
 
                 <!-- 赞赏 -->
-                <div class="ui center aligned basic segment">
-                    <button class="ui orange basic circular button" id="payButton">赞赏</button>
-                </div>
-
-                <div class="ui payQR flowing popup transition hidden">
-                    <div class="ui orange basic label">
-                        <div class="ui images" style="font-size: inherit !important;">
-                            <div class="image">
-                                <img alt="" class="ui rounded borded images" src="../static/images/wechat.jpg"
-                                     style="width: 120px;" th:src="@{/images/wechat.jpg}">
-                                <div>微信</div>
-                            </div>
-                            <div class="image">
-                                <img alt="" class="ui rounded borded images" src="../static/images/wechat.jpg"
-                                     style="width: 120px;" th:src="@{/images/wechat.jpg}">
-                                <div>支付宝</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
-            <!-- 博客信息 -->
-          <!--  <div class="ui basic segment">
-                <div class="ui grid">
-                    <div class="eleven wide column">
-                        <ui class="list">
-                            <li>作者: <span th:text="${blog.user.nickname}">陈鹤峰</span><a href="#" target="_blank"
-                                                                                       th:href="@{/about}">(联系作者)</a></li>
-                            <li>发表时间: <span th:text="${#dates.format(blog.updateTime, 'yyyy-MM-dd HH:mm')}">2019</span>
-                            </li>
-                            <li>分类: <span th:text="${blog.type.name}"></span></li>
-                        </ui>
-                    </div>
-                    <div class="five wide column">
-                        <img alt="#" class="ui right floated rounded bordered image" src="../static/images/wechat.jpg"
-                             style="width: 110px" th:src="@{/images/wechat.jpg}">
-                    </div>
-                </div>
-            </div>-->
+
+
 
         </div>
 
