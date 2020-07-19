@@ -182,6 +182,7 @@ table {
 /*--- position of toc -----*/
 #toc-container{
     padding: 5px;
+    display: none;
 }
 #toc{
     padding-right: 15px;

@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
@@ -16,16 +16,6 @@
             <div class="ui inverted secondary stackable menu">
                 <h2 class="ui item teal header">Blog</h2>
                 <a href="#" class="m-item item m-mobile-hide"><i class="icon home"></i>首页</a>
-                <a href="#" class="m-item item m-mobile-hide"><i class="icon idea"></i>分类</a>
-                <a href="#" class="m-item item m-mobile-hide"><i class="icon tags"></i>标签</a>
-                <a href="#" class="m-item item m-mobile-hide"><i class="icon clone"></i>归档</a>
-                <a href="#" class="active m-item item m-mobile-hide"><i class="icon info"></i>关于我</a>
-                <div class="item right m-mobile-hide">
-                    <div class="ui icon transparent inverted input">
-                        <input type="text" placeholder="search...">
-                        <i class="icon link search"></i>
-                    </div>
-                </div>
             </div>
             <a href="#" class="ui menu toggle black icon button m-top-right m-mobile-show">
                 <i class="sidebar icon"></i>
@@ -37,7 +27,6 @@
     <!-- context -->
     <div id="content-container" class="m-container-small m-padded-tb-big">
         <div class="ui container">
-
             <div class="ui attached segment content-bgc" id="about-me">
                 <h1 id="about-me">About Me</h1>
                 <img class="ui small right floated image" th:src="@{images/hefeng.jpg}" src="../static/images/hefeng.jpg">
@@ -54,7 +43,11 @@
                 <p>This website was developed on the basis of a Udemy course project. The main tech stack used in backend are <strong>Spring Boot</strong>, <strong>Thymeleaf</strong>, <strong>JPA</strong>, <strong>Mysql</strong>. In Frontend, the <strong>HTML</strong>, <strong>CSS</strong>, <strong>Semantic-UI</strong>, <strong>Javascript</strong>, <strong>jQuery</strong> and some libaries of <strong>Javascript</strong> were employed.</p>
                 <p>The admin system of this website was completely restructured. I use JWT token instead of session to make every request statless. Every time when the user login in successfully, token was stored in SessionStorage of the Browser. All the request in Admin system was made via Ajax becaus of request Header &quot;Authorization&quot; need to be added. Therefore, the Admin system of this blog website is more like a single page application and only a little thymeleaf are employed for convenience.</p>
             </div>
-
+            <div class="ui attached segment content-bgc">
+                <a href="https://github.com/chhefeng" class="ui circular icon button"><i class="github icon"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100008354254898" class="ui wechat circular icon button"><i class="facebook icon"></i></a>
+                <a href="https://www.xing.com/profile/Hefeng_Chen/cv" class="ui qq circular icon button" data-content="865729312" data-position="bottom center"><i class="xing icon"></i></a>
+            </div>
         </div>
     </div>
 

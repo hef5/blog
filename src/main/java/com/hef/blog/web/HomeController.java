@@ -30,11 +30,17 @@ public class HomeController {
 
     @GetMapping({"/",""})
     public String index(@PageableDefault(size=10, sort ={"updateTime"}, direction = Sort.Direction.DESC)
-                                    Pageable pageable, Model model){
+                                Pageable pageable, Model model){
         model.addAttribute("page", blogService.listBlog(pageable));
         model.addAttribute("tags", tagService.listTagTop(10));
         System.out.println("----- index -----");
         return "home";
+    }
+
+    @GetMapping("/blog/{id}")
+    public String blog(@PathVariable Long id, Model model){
+        model.addAttribute("blog", blogService.getAndConvert(id));
+        return "blog";
     }
 
     @PostMapping("/search")
@@ -44,14 +50,5 @@ public class HomeController {
         model.addAttribute("query", query);
         return "search";
     }
-
-    @GetMapping("/blog/{id}")
-    public String blog(@PathVariable Long id, Model model){
-        model.addAttribute("blog", blogService.getAndConvert(id));
-        return "blog";
-    }
-
-
-
 
 }

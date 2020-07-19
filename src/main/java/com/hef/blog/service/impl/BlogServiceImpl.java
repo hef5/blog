@@ -120,7 +120,7 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findAll((Specification<Blog>) (root, cq, cb) -> {
             Join join = root.join("tags");
             return cb.equal(join.get("id"),tagId);
-        },pageable);
+        }, pageable);
     }
 
 
