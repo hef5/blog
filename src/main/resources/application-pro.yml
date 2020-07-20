@@ -1,21 +1,26 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog_product?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     username: hefeng
     password: hefeng
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-logging:
-  level:
-    root: info #warn
-    com.hef.blog: debug #info
-  file: log/blog-pro.log
+  cloud:
+    gcp:
+      sql:
+        database-name: blog_product
+        instance-connection-name: blog-website-283307:europe-west4:chen-blog
+        enabled: true
+        credentials:
+          location: file:/blog-key.json
+      logging:
+        enabled: true
 server:
-  port: 8081
+  port: 8080
+  address: 0.0.0.0
+
+
 
 
 

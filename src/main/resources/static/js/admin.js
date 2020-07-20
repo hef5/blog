@@ -177,7 +177,7 @@ function otherTagPage(pageNumber) {
 function postTag() {
     let url;
     let tagId = $("[name='id']").val();
-    if (tagId == null) {
+    if (typeof tagId == "undefined" || tagId == null || tagId == "") {
         url = "/admin/tags";
     } else {
         url = "/admin/tags/" + tagId;
@@ -220,7 +220,7 @@ function deleteType(typeId) {
 function postType() {
     let url;
     let typeId = $("[name='id']").val();
-    if (typeId == null) {
+    if (typeof typeId == "undefined" || typeId == null || typeId == "") {
         url = "/admin/types";
     } else {
         url = "/admin/types/" + typeId;
@@ -273,9 +273,9 @@ function ajaxPost(url, postData, selector = "#content-container") {
 }
 
 window.onpopstate = function (e) {
-    if (e.state.data == null) {
+    if (e.state.data == null || typeof e.state.data == "undefined") {
         ajaxGet(e.state.url);
-    } else if (e.state.selector == null) {
+    } else if (e.state.selector == null || typeof e.state.selector == "undefined") {
         ajaxPost(e.state.url, e.state.data);
     } else {
         ajaxPost(e.state.url, e.state.data, e.state.selector);

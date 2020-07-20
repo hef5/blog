@@ -33,7 +33,7 @@ public class TypeController {
 
     @GetMapping("/types/{pageNumber}")
     public String list(@PathVariable int pageNumber, Model model){
-        Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("id").descending());
+        Pageable pageable = PageRequest.of(pageNumber, 10, Sort.by("id").descending());
         model.addAttribute("page", typeService.listType(pageable));
         return "admin/types";
     }

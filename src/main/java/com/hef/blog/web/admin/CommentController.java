@@ -30,8 +30,8 @@ public class CommentController {
         this.blogService = blogService;
     }
 
-    @Value("${comment.avatar}")
-    private String avatar;
+/*    @Value("${comment.avatar}")
+    private String avatar;*/
 
     @GetMapping("/comments/{blogId}")
     public String comments(@PathVariable Long blogId, Model model) {

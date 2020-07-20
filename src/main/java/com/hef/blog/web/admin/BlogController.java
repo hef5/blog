@@ -52,7 +52,7 @@ public class BlogController {
     @GetMapping("/blogs/{pageNumber}")
     public String blogs(@PathVariable int pageNumber,
                         @ModelAttribute("blog") BlogQuery blog,  Model model){
-        Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("updateTime").descending());
+        Pageable pageable = PageRequest.of(pageNumber, 10, Sort.by("updateTime").descending());
         model.addAttribute("page", blogService.listBlog(pageable));
         model.addAttribute("types", typeService.listType());
         return LIST;
@@ -68,7 +68,7 @@ public class BlogController {
     @PostMapping("/blogs/search/{pageNumber}")
     public String search(@PathVariable int pageNumber,
                          @ModelAttribute("blog") BlogQuery blog, Model model){
-        Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("updateTime").descending());
+        Pageable pageable = PageRequest.of(pageNumber, 10, Sort.by("updateTime").descending());
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         model.addAttribute("types", typeService.listType());
         return LIST;

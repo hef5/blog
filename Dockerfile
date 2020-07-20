@@ -1,23 +1,17 @@
-# Use the official maven/Java 8 image to create a build artifact.
-# https://hub.docker.com/_/maven
-FROM maven:3.5-jdk-8-alpine as builder
+FROM adoptopenjdk/openjdk11:alpine-jre
 
 # Copy local code to the container image.
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-
-# Build a release artifact.
-RUN mvn package -DskipTests
-
-# Use AdoptOpenJDK foabo'ur base image.
-# It's important to use OpenJDK 8u191 or above that has container support enabled.
-# https://hub.docker.com/r/adoptopenjdk/openjdk8
-# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-FROM adoptopenjdk/openjdk8:jdk8u202-b08-alpine-slim
 
 # Copy the jar to the production image from the builder stage.
-COPY --from=builder /app/target/blog-*.jar /blog.jar
+# path in container: ./blog-key.json
+COPY ./blog-key.json /blog-key.json
 
-# Run the web service on container startup.
-CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/blog.jar"]
+# path in container: ./blog.jar
+COPY target/blog-0.0.1-SNAPSHOT.jar /blog.jar
+
+ENV GOOGLE_APPLICATION_CREDENTIALS="/blog-key.json"
+ENV PORT=8080
+
+# java -jar /app/blog.jar
+ENTRYPOINT ["java","-Dspring.profiles.active=pro", "-jar","/blog.jar"]

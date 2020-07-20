@@ -1,13 +1,10 @@
 spring:
   thymeleaf:
     mode: HTML
-    cache: false
-
 
   profiles:
     active: pro
 
-comment.avatar: https://picsum.photos/100
 
 
 
