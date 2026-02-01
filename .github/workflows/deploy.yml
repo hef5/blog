@@ -1,0 +1,57 @@
+name: Build and Deploy to Cloud Run
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }} # Define this secret in GitHub repo settings
+  REGION: europe-west3 # Adjust region as needed
+  SERVICE_NAME: blog-platform
+  REPO_NAME: blog-repo
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Authenticate to Google Cloud using Workload Identity Federation
+      # (Recommended over long-lived Service Account JSON keys)
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}' # Or use workload_identity_provider
+
+      # Set up Cloud SDK
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      # Configure Docker to use gcloud as a credential helper
+      - name: Docker Auth
+        run: |
+          gcloud auth configure-docker
+
+      # Build the Docker image
+      - name: Build and Push Container
+        run: |
+          docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} .
+          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+      # Deploy to Cloud Run
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          region: ${{ env.REGION }}
+          image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          flags: '--allow-unauthenticated' # Adjust based on access needs
+          env_vars: |
+            SPRING_PROFILES_ACTIVE=pro

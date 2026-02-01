@@ -1,0 +1,31 @@
+steps:
+  # 1. Build the container image using the updated multi-stage Dockerfile
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/blog-platform:$COMMIT_SHA', '.']
+
+  # 2. Push the image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/blog-platform:$COMMIT_SHA']
+
+  # 3. Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'blog-platform'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/blog-platform:$COMMIT_SHA'
+      - '--region'
+      - 'europe-west3'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated' # Update if public access is not desired
+      - '--set-env-vars'
+      - 'SPRING_PROFILES_ACTIVE=pro'
+
+images:
+  - 'gcr.io/$PROJECT_ID/blog-platform:$COMMIT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

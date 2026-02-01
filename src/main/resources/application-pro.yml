@@ -1,19 +1,20 @@
 spring:
   datasource:
-    username: hefeng
-    password: hefeng
+    # Read from environment variables, defaulting to 'hefeng' only if not set
+    username: ${DB_USER:hefeng}
+    password: ${DB_PASS:hefeng}
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
   cloud:
     gcp:
       sql:
-        database-name: blog_product
-        instance-connection-name: blog-website-283307:europe-west4:chen-blog
+        database-name: ${DB_NAME:blog_product}
+        # Must be injected via environment variable CLOUD_SQL_INSTANCE
+        instance-connection-name: ${CLOUD_SQL_INSTANCE}
         enabled: true
-        credentials:
-          location: file:/blog-key.json
+      # Removed manual credentials location to leverage Cloud Run's automatic Service Account identity
       logging:
         enabled: true
 server:
